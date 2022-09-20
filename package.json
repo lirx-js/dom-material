@@ -1,0 +1,15 @@
+{
+  "_name": "test",
+  "name": "@lirx/dom-material",
+  "version": "1.0.0",
+  "description": "Description",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lirx-js/dom-material"
+  },
+  "keywords": [],
+  "author": "Valentin Richard",
+  "license": "MIT",
+  "access": "public",
+  "dependencies": {}
+}
