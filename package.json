@@ -1,7 +1,7 @@
 {
   "_name": "test",
   "name": "@lirx/dom-material",
-  "version": "1.0.0",
+  "version": "1.0.0-beta.1",
   "description": "Description",
   "repository": {
     "type": "git",
@@ -11,5 +11,9 @@
   "author": "Valentin Richard",
   "license": "MIT",
   "access": "public",
-  "dependencies": {}
+  "sideEffects": false,
+  "dependencies": {
+    "@lirx/core": "1.0.0",
+    "@lirx/dom": "1.0.0"
+  }
 }

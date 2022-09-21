@@ -1,6 +1,6 @@
 {
   "name": "ts-lib-seed",
-  "version": "1.2.7",
+  "version": "1.2.7-with-copy-scss",
   "description": "Seed to build a library",
   "main": "index.js",
   "scripts": {
@@ -32,6 +32,8 @@
     "dev:package:tcs:cjs:windows": "echo 'dev:package:tcs:cjs:windows' && tsc-watch -p tsconfig/tsconfig.build.package.cjs.json --onSuccess \\\"yarn run dev:package:tcs:cjs:onsuccess\\\"",
     "dev:package:tcs:cjs:linux": "echo 'dev:package:tcs:cjs:linux' && tsc-watch -p tsconfig/tsconfig.build.package.cjs.json --onSuccess 'yarn run dev:package:tcs:cjs:onsuccess'",
     "dev:package:tcs:cjs:onsuccess": "echo 'dev:package:tcs:cjs:onsuccess' && yarn run build:package:rename:cjs",
+    "_____SCSS_____": "",
+    "copy:scss-files": "node tools/package/copy/copy-scss-files.js",
     "_________________INDEX_FILES_________________": "",
     "comment:index-files": "node tools/index/comment-index-files.js",
     "uncomment:index-files": "node tools/index/comment-index-files.js --uncomment",
