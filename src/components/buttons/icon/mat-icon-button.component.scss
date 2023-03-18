@@ -49,13 +49,13 @@
     }
 
     &:focus-visible {
-      color: $mat-icon-button-color-focus;
-      background-color: $mat-icon-button-background-color-focus;
+      color: $mat-icon-button-color-focused;
+      background-color: $mat-icon-button-background-color-focused;
 
       & > mat-ripple {
         & > .content {
           & > svg {
-            fill: #{$mat-icon-button-color-focus};
+            fill: #{$mat-icon-button-color-focused};
           }
         }
       }

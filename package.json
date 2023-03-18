@@ -1,7 +1,7 @@
 {
   "_name": "test",
   "name": "@lirx/dom-material",
-  "version": "1.0.0-beta.1",
+  "version": "0.5.0-beta.1",
   "description": "Description",
   "repository": {
     "type": "git",
@@ -13,7 +13,13 @@
   "access": "public",
   "sideEffects": false,
   "dependencies": {
-    "@lirx/core": "1.0.0",
-    "@lirx/dom": "1.0.0"
-  }
+    "@lirx/core": "^1.3.0",
+    "@lirx/dom": "^0.8.0"
+  },
+  "linkedDependencies": [
+    "@lirx/core",
+    "@lirx/utils",
+    "@lirx/promise",
+    "@lirx/dom"
+  ]
 }

@@ -17,9 +17,9 @@ $mat-button-color-hover: var(--mat-button-color-hover, $mat-button-color);
 $mat-button-background-color-hover: var(--mat-button-background-color-hover, #eee);
 $mat-button-border-color-hover: var(--mat-button-border-color-hover, $mat-button-background-color-hover);
 
-$mat-button-color-focus: var(--mat-button-color-focus, $mat-button-color);
-$mat-button-background-color-focus: var(--mat-button-background-color-focus, #ddd);
-$mat-button-border-color-focus: var(--mat-button-border-color-focus, $mat-button-background-color-focus);
+$mat-button-color-focused: var(--mat-button-color-focused, $mat-button-color);
+$mat-button-background-color-focused: var(--mat-button-background-color-focused, #ddd);
+$mat-button-border-color-focused: var(--mat-button-border-color-focused, $mat-button-background-color-focused);
 
 $mat-button-color-disabled: var(--mat-button-color-disabled, rgba(black, 0.26));
 $mat-button-background-color-disabled: var(--mat-button-background-color-disabled, $mat-button-background-color);

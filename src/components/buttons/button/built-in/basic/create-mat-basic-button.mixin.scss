@@ -12,9 +12,9 @@
   --mat-button-background-color-hover: #{change-color-opacity($color-raw, 0.15)};
   --mat-button-border-color-hover: #{change-color-opacity($color-raw, 0.15)};
 
-  --mat-button-color-focus: #{$color};
-  --mat-button-background-color-focus: #{change-color-opacity($color-raw, 0.20)};
-  --mat-button-border-color-focus: #{change-color-opacity($color-raw, 0.20)};
+  --mat-button-color-focused: #{$color};
+  --mat-button-background-color-focused: #{change-color-opacity($color-raw, 0.20)};
+  --mat-button-border-color-focused: #{change-color-opacity($color-raw, 0.20)};
 
   --mat-button-color-disabled: #{change-color-opacity($color-raw, 0.26)};
   --mat-button-background-color-disabled: transparent;

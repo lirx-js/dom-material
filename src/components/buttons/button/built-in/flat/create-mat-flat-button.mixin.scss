@@ -12,9 +12,9 @@
   --mat-button-background-color-hover: #{$color};
   --mat-button-border-color-hover: #{$color};
 
-  --mat-button-color-focus: white;
-  --mat-button-background-color-focus: #{change-color-lightness($color-raw, -20%)};
-  --mat-button-border-color-focus: #{change-color-lightness($color-raw, -20%)};
+  --mat-button-color-focused: white;
+  --mat-button-background-color-focused: #{change-color-lightness($color-raw, -20%)};
+  --mat-button-border-color-focused: #{change-color-lightness($color-raw, -20%)};
 
   $color-disabled: rgba(black, 0.26);
   --mat-button-color-disabled:$color-disabled;

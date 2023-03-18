@@ -33,6 +33,12 @@ export interface ICreateMatButtonComponentOptions extends Pick<ICreateComponentO
   withButtonStyle?: boolean;
 }
 
+// export interface ICreateMatButtonComponentOptions {
+//   name: string;
+//   styles?: IComponentStyle[];
+//   withButtonStyle?: boolean;
+// }
+
 export function createMatButtonComponent(
   {
     name,

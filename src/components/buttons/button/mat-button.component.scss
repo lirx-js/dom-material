@@ -52,14 +52,14 @@
     border-color $mat-button-transition-duration;
 
     &:focus-visible {
-      color: $mat-button-color-focus;
-      background-color: $mat-button-background-color-focus;
-      border-color: $mat-button-border-color-focus;
+      color: $mat-button-color-focused;
+      background-color: $mat-button-background-color-focused;
+      border-color: $mat-button-border-color-focused;
 
       & > mat-ripple {
         & > .content {
           & > svg {
-            fill: #{$mat-button-color-focus};
+            fill: #{$mat-button-color-focused};
           }
         }
       }
