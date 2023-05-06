@@ -1,1 +1,1 @@
-export * from './dual-ring-loader/index';
+export * from './mat-dual-ring-loader/index';

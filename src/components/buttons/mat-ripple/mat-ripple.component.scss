@@ -1,0 +1,28 @@
+@import 'mat-ripple.variables';
+
+/** STYLE **/
+
+:host {
+  & > .mat-ripples-container {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    border-radius: inherit;
+
+    &:not(:empty) {
+      transform: translateZ(0);
+    }
+  }
+
+  &:not(.mat-unbounded) {
+    & > .mat-ripples-container {
+      overflow: hidden;
+    }
+  }
+
+  &:disabled {
+    & > .mat-ripples-container {
+      display: none;
+    }
+  }
+}

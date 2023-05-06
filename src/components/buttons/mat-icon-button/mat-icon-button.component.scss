@@ -1,0 +1,19 @@
+@import 'mat-icon-button.variables';
+
+
+/** STYLE **/
+
+:host {
+  gap: $mat-icon-button-padding;
+  padding: $mat-icon-button-padding;
+
+  border-width: 0;
+  border-radius: calc(#{$mat-icon-button-padding} + (#{$mat-icon-button-icon-size} * 0.5));
+
+  font-size: 0;
+
+  & > svg {
+    width: $mat-icon-button-icon-size;
+    height: $mat-icon-button-icon-size;
+  }
+}

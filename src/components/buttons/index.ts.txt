@@ -1,3 +1,4 @@
-export * from './button/index';
-export * from './icon/index';
-export * from './ripple/index';
+export * from './mat-button/index';
+export * from './mat-clickable/index';
+export * from './mat-icon-button/index';
+export * from './mat-ripple/index';

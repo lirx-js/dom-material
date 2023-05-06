@@ -1,0 +1,61 @@
+@import 'mat-icon-button.variables';
+
+
+/** STYLE **/
+
+:host {
+  display: inline-flex;
+  position: relative;
+
+  align-items: center;
+  gap: $mat-icon-button-padding;
+  padding: $mat-icon-button-padding;
+
+  border: 0;
+  border-radius: calc(#{$mat-icon-button-padding} + (#{$mat-icon-button-icon-size} * 0.5));
+
+  color: $mat-icon-button-color;
+  fill: $mat-icon-button-color;
+  background-color: $mat-icon-button-background-color;
+
+  font-size: 0;
+
+  appearance: none;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  & > svg {
+    width: $mat-icon-button-icon-size;
+    height: $mat-icon-button-icon-size;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+    transition: color $mat-icon-button-transition-duration,
+    fill $mat-icon-button-transition-duration,
+    background-color $mat-icon-button-transition-duration;
+
+    &:focus-visible {
+      color: $mat-icon-button-color-focused;
+      fill: $mat-icon-button-color-focused;
+      background-color: $mat-icon-button-background-color-focused;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: $mat-icon-button-color-hover;
+        fill: $mat-icon-button-color-hover;
+        background-color: $mat-icon-button-background-color-hover;
+      }
+    }
+  }
+
+  &:disabled {
+    transition: all 0ms;
+    cursor: default;
+    color: $mat-icon-button-color-disabled;
+    fill: $mat-icon-button-color-disabled;
+    background-color: $mat-icon-button-background-color-disabled;
+  }
+}

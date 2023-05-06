@@ -1,0 +1,69 @@
+@import 'mat-button.variables';
+
+
+
+/** STYLE **/
+
+:host {
+  display: inline-flex;
+  position: relative;
+
+  align-items: center;
+  justify-content: center;
+  gap: calc(#{$mat-button-horizontal-padding} * 0.5);
+  padding: $mat-button-vertical-padding $mat-button-horizontal-padding;
+
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+
+  font-family: $mat-button-font-family;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+
+  color: $mat-button-color;
+  fill: $mat-button-color;
+  background-color: $mat-button-background-color;
+  border-color: $mat-button-border-color;
+
+  appearance: none;
+  text-decoration: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:not(:disabled, .mat-disabled, [disabled]) {
+    cursor: pointer;
+    transition: color $mat-button-transition-duration,
+    fill $mat-button-transition-duration,
+    background-color $mat-button-transition-duration,
+    border-color $mat-button-transition-duration;
+
+    &:focus-visible {
+      color: $mat-button-color-focused;
+      fill: $mat-button-color-focused;
+      background-color: $mat-button-background-color-focused;
+      border-color: $mat-button-border-color-focused;
+    }
+
+    @media (hover: hover) {
+      &:hover {
+        color: $mat-button-color-hover;
+        fill: $mat-button-color-hover;
+        background-color: $mat-button-background-color-hover;
+        border-color: $mat-button-border-color-hover;
+      }
+    }
+  }
+
+  &:disabled,
+  &.mat-disabled,
+  &[disabled] {
+    transition: all 0ms;
+    cursor: default;
+    color: $mat-button-color-disabled;
+    fill: $mat-button-color-disabled;
+    background-color: $mat-button-background-color-disabled;
+    border-color: $mat-button-border-color-disabled;
+  }
+}

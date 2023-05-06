@@ -1,0 +1,26 @@
+@import 'mat-column.variables';
+
+
+
+:host {
+  display: block;
+  height: 100%;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  & > .content {
+    $horizontal-gap: 10px;
+    $vertical-gap: 10px;
+
+    display: inline-flex;
+    height: 100%;
+    flex-wrap: wrap;
+    flex-direction: column;
+
+    & > * {
+      width: $mat-column-width;
+      padding: calc(#{$mat-column-gap-vertical} * 0.5) calc(#{$mat-column-gap-horizontal} * 0.5);
+    }
+  }
+}
