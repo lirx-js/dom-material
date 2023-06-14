@@ -20,6 +20,9 @@ export function inputValueModifierFunction(
   }
 }
 
+/**
+ * @deprecated
+ */
 export const INPUT_VALUE_MODIFIER = createVirtualDOMNodeModifier('input-value', inputValueModifierFunction);
 
 

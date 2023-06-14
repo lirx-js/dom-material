@@ -1,40 +1,39 @@
-@import 'mat-badge.variables';
-
-
+@use 'mat-badge.variables' as mat-badge;
 
 :host {
-  display: inline-block;
   position: relative;
 
-  & > .badge {
+  &::after {
+    display: block;
+    content: var(--mat-badge-content, '');
     position: absolute;
-    background-color: $mat-badge-background-color;
+    background-color: mat-badge.$mat-badge-background-color;
   }
 
-  @include mat-badge-position($mat-badge-size);
+  @include mat-badge.mat-badge-position(mat-badge.$mat-badge-size);
 
-  &.mat-dot {
-    @include mat-badge-position($mat-badge-size-dot);
+  &.mat-badge-dot {
+    @include mat-badge.mat-badge-position(mat-badge.$mat-badge-size-dot);
 
-    & > .badge {
+    &::after {
       font-size: 0;
-      width: $mat-badge-size-dot;
-      height: $mat-badge-size-dot;
+      width: mat-badge.$mat-badge-size-dot;
+      height: mat-badge.$mat-badge-size-dot;
       border-radius: 50%;
     }
   }
 
-  &:not(.mat-dot) {
-    & > .badge {
-      height: $mat-badge-size;
-      line-height: $mat-badge-size;
-      min-width: $mat-badge-size;
-      max-width: calc(100% + (#{$mat-badge-size} * 0.5));
+  &:not(.mat-badge-dot) {
+    &::after {
+      height: mat-badge.$mat-badge-size;
+      line-height: mat-badge.$mat-badge-size;
+      min-width: mat-badge.$mat-badge-size;
+      max-width: calc(100% + (#{mat-badge.$mat-badge-size} * 0.5));
       padding: 0 5px;
-      border-radius: calc(#{$mat-badge-size} * 0.5);
+      border-radius: calc(#{mat-badge.$mat-badge-size} * 0.5);
 
       text-align: center;
-      color: $mat-badge-text-color;
+      color: mat-badge.$mat-badge-text-color;
       font-weight: 600;
       font-size: 12px;
 

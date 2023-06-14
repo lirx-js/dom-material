@@ -92,7 +92,7 @@ export const MatSidenavContainerComponent = createComponent<IMatSidenavContainer
 
     const $userClose = node.outputs.$set('userClose');
 
-    node.setReactiveClass('mat-opened', opened$);
+    node.setReactiveClass('mat--opened', opened$);
     node.setReactiveClass('mat-has-backdrop', hasBackdrop$);
 
     const classList$ = function$$(

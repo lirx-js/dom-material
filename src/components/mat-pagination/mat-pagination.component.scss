@@ -1,0 +1,63 @@
+@use './mat-pagination.variables' as mat-pagination;
+@use '../buttons/mat-button/mat-button.variables' as mat-button;
+
+:host {
+  display: block;
+  font-size: 0;
+
+  & > ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+
+    & > li {
+      & > * {
+        min-width: calc(#{mat-pagination.$mat-pagination-button-content-size} + (#{mat-pagination.$mat-pagination-button-padding-x} * 2) + 2px); // 2px => border
+        line-height: mat-pagination.$mat-pagination-button-content-size;
+        //font-size: calc(#{mat-pagination.$mat-pagination-button-content-size} * (14 / 24));
+        font-size: calc(#{mat-pagination.$mat-pagination-button-content-size} * (16 / 28));
+      }
+
+      & > button {
+        --mat-button-padding-y: #{mat-pagination.$mat-pagination-button-padding-y};
+        --mat-button-padding-x: #{mat-pagination.$mat-pagination-button-padding-x};
+
+        border-radius: calc(#{mat-pagination.$mat-pagination-button-padding-y} + (#{mat-pagination.$mat-pagination-button-content-size} * 0.5));
+
+        & > svg {
+          width: mat-pagination.$mat-pagination-button-content-size;
+          height: mat-pagination.$mat-pagination-button-content-size;
+        }
+
+        &.mat--selected {
+          --mat-button-color--disabled: #{mat-pagination.$mat-pagination-button-color--selected};
+          --mat-button-background-color--disabled: #{mat-pagination.$mat-pagination-button-background-color--selected};
+          --mat-button-border-color--disabled: #{mat-pagination.$mat-pagination-button-border-color--selected};
+        }
+      }
+
+      & > .ellipsis {
+        padding: mat-pagination.$mat-pagination-button-padding-y mat-pagination.$mat-pagination-button-padding-x;
+        text-align: center;
+        //font-size: 14px;
+        font-weight: 500;
+        font-family: mat-button.$mat-button-font-family;
+        color: mat-button.$mat-button-color;
+        border: 1px solid transparent;
+        user-select: none;
+      }
+    }
+  }
+
+
+  &.mat--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }
+}

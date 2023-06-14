@@ -1,11 +1,11 @@
-@import 'mat-flat-button-primary.variables';
-@import '../create-mat-flat-button.mixin';
+@use '../../../../../../styles/mat-global.variables' as mat-global;
+@use '../create-mat-flat-button.mixin' as create-mat-flat-button-mixin;
 
 /** STYLE **/
 
 :host {
-  @include create-mat-flat-button(
-    $mat-color-primary,
-    $mat-color-primary-raw,
+  @include create-mat-flat-button-mixin.create-mat-flat-button(
+          mat-global.$mat-color-primary,
+          mat-global.$mat-color-primary-raw,
   );
 }

@@ -1,0 +1,19 @@
+
+// computed in js
+$mat-column-width: var(--mat-column-width, 0px);
+$mat-column-page: var(--mat-column-page, 0);
+$mat-column-drag: var(--mat-column-drag, 0px);
+
+// variables
+$mat-column-transition-duration: var(--mat-column-transition-duration, 200ms);
+$mat-column-gap: var(--mat-column-gap, 8px);
+$mat-column-gap-y: var(--mat-column-gap-y, $mat-column-gap);
+$mat-column-gap-x: var(--mat-column-gap-x, $mat-column-gap);
+
+$mat-column-padding: var(--mat-column-padding, 8px);
+$mat-column-padding-y: var(--mat-column-padding-y, $mat-column-padding);
+$mat-column-padding-x: var(--mat-column-padding-x, $mat-column-padding);
+
+$mat-column-pagination-border-color: var(--mat-column-pagination-border-color, #ddd);
+$mat-column-pagination-background-color: var(--mat-column-pagination-background-color, #fff);
+

@@ -1,4 +1,3 @@
 export * from './mat-button/index';
-export * from './mat-clickable/index';
 export * from './mat-icon-button/index';
 export * from './mat-ripple/index';

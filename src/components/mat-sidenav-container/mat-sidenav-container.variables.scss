@@ -3,3 +3,14 @@ $mat-sidenav-container-sidenav-background-color: var(--mat-sidenav-container-sid
 $mat-sidenav-container-sidenav-max-width: var(--mat-sidenav-container-sidenav-max-width, 300px);
 $mat-sidenav-container-transition-duration: var(--mat-sidenav-container-transition-duration, 250ms);
 
+/** PRIVATE VARIABLES **/
+
+$mat-sidenav-container-sidenav-drag-width: 8px;
+$mat-sidenav-container-sidenav-border: 1px solid rgba(black, 0.12);
+$mat-sidenav-container-sidenav-width: min(#{$mat-sidenav-container-sidenav-max-width}, calc(100% - #{$mat-sidenav-container-sidenav-drag-width}));
+
+@mixin mat-sidenav-container-sidenav-shadow($x) {
+  box-shadow: 0 (8px * $x) 10px (-5px) rgba(black, 0.2),
+  0 (16px * $x) 24px 2px rgba(black, 0.14),
+  0 (6px * $x) 30px 5px rgba(black, 0.12);
+}

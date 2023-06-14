@@ -1,1 +1,1 @@
-export * from './mat-badge.component';
+export * from './mat-badge.modifier';

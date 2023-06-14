@@ -1,4 +1,0 @@
-export * from './mat-column/index';
-export * from './mat-column-item/index';
-export * from './mat-grid/index';
-export * from './mat-grid-item/index';

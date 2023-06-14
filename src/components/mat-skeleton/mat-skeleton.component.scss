@@ -1,9 +1,9 @@
-@import 'mat-skeleton.variables';
+@use 'mat-skeleton.variables' as mat-skeleton;
 
 :host {
   display: block;
   position: relative;
-  background-color: $mat-skeleton-background-color;
+  background-color: mat-skeleton.$mat-skeleton-background-color;
   height: 1.2em;
   animation: 1.5s ease-in-out 0.5s infinite normal none running mat-skeleton-pulse-animation;
 
@@ -22,8 +22,8 @@
   }
 
   &.mat-circular {
-    width: $mat-skeleton-circular-size;
-    height: $mat-skeleton-circular-size;
+    width: mat-skeleton.$mat-skeleton-circular-size;
+    height: mat-skeleton.$mat-skeleton-circular-size;
     border-radius: 50%;
   }
 

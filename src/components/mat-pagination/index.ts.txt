@@ -1,0 +1,3 @@
+export * from './helpers/index';
+export * from './mat-pagination.component';
+export * from './types/index';

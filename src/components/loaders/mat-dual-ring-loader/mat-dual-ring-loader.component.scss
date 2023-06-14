@@ -1,10 +1,10 @@
-@import 'mat-dual-ring-loader.variables';
+@use 'mat-dual-ring-loader.variables' as mat-dual-ring-loader;
 
 
 :host {
   display: inline-block;
-  width: $mat-dual-ring-loader-size;
-  height: $mat-dual-ring-loader-size;
+  width: mat-dual-ring-loader.$mat-dual-ring-loader-size;
+  height: mat-dual-ring-loader.$mat-dual-ring-loader-size;
 
   &::after {
     content: '';
@@ -13,8 +13,8 @@
     height: 100%;
     border-radius: 50%;
     border-style: solid;
-    border-width: $mat-dual-ring-loader-stroke-size;
-    border-color: $mat-dual-ring-loader-color transparent $mat-dual-ring-loader-color transparent;
+    border-width: mat-dual-ring-loader.$mat-dual-ring-loader-stroke-size;
+    border-color: mat-dual-ring-loader.$mat-dual-ring-loader-color transparent mat-dual-ring-loader.$mat-dual-ring-loader-color transparent;
     animation: mat-dual-ring-loader-animation 1.2s linear infinite;
   }
 }

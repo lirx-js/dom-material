@@ -1,0 +1,11 @@
+
+$mat-grid-columns:  var(--mat-grid-columns, 12);
+$mat-grid-rows: var(--mat-grid-rows);
+$mat-grid-gap: var(--mat-grid-gap, 4px);
+$mat-grid-gap-x: var(--mat-grid-gap-x, $mat-grid-gap);
+$mat-grid-gap-y: var(--mat-grid-gap-y, $mat-grid-gap);
+
+$mat-grid-item-left: var(--mat-grid-item-left);
+$mat-grid-item-top: var(--mat-grid-item-top);
+$mat-grid-item-width: var(--mat-grid-item-width);
+$mat-grid-item-height: var(--mat-grid-item-height);

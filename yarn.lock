@@ -3,21 +3,29 @@
 
 
 "@lirx/core@latest":
-  version "1.4.0-dev.1682681176592"
-  resolved "http://localhost:4873/@lirx/core/-/core-1.4.0-dev.1682681176592.tgz#dd8fb488f23e2f04aa53970647a63912b2f9075d"
-  integrity sha512-OmwsVErudqFViCo4onVuMOml0RzghQQVer6KeJhidNa1vuOQ+sOWKch7wBO1eotQ6hH96KqO2BPr47Wuys63OA==
+  version "1.4.0-dev.1685444148134"
+  resolved "http://localhost:4873/@lirx/core/-/core-1.4.0-dev.1685444148134.tgz#6e79ba7a15908756ec95c0a85dade8ab30c28555"
+  integrity sha512-LtlZEE/Z30PNRSIArGGgwkXNnWb6ctnKSrSLsSvvXdOmsRRV++rUohJLovpe6FQ0MwnUxWj2N7pGj7KxuLFiNQ==
   dependencies:
     "@lirx/utils" latest
 
 "@lirx/dom@latest":
-  version "0.9.0-dev.1683270155267"
-  resolved "http://localhost:4873/@lirx/dom/-/dom-0.9.0-dev.1683270155267.tgz#403306fb0e881a1336ee5876acbe01477e6eefff"
-  integrity sha512-+aXKLNgBityRNQLbqXrXPmWN3up0lGMq2MCsgALBerJSYjnhjSPkzPG2mhSMhm65YzZ6G1cm+yi0TZ9JBqEXuw==
+  version "0.9.0-dev.1684081864758"
+  resolved "http://localhost:4873/@lirx/dom/-/dom-0.9.0-dev.1684081864758.tgz#922f6135ab9211ea20c944d484b7bd1c5e14b763"
+  integrity sha512-QgFUq0SNLn3JEZPj7Uq4AEu6ynWaYg7+1ZEIz4KtnpZXSFhDPeTYCzp9Ucd1d9mKwAjhU5WAf5Fuj3L3KfShzA==
   dependencies:
     "@lirx/core" latest
     "@lirx/utils" latest
 
+"@lirx/mdi@latest":
+  version "1.0.0-dev.1681473942936"
+  resolved "http://localhost:4873/@lirx/mdi/-/mdi-1.0.0-dev.1681473942936.tgz#161173f1d3be17503b19af53d6e5448f94b62d35"
+  integrity sha512-DBVQz/o1S5G3mn1Rh6EM0UJ+pxHXxs2D98D34fxUF/BrhBT0NaOoCY+oE2r/w7OA4T7q1/NzMcHCoUDNu26Geg==
+  dependencies:
+    "@lirx/core" latest
+    "@lirx/dom" latest
+
 "@lirx/utils@latest":
-  version "1.1.1-dev.1683096477611"
-  resolved "http://localhost:4873/@lirx/utils/-/utils-1.1.1-dev.1683096477611.tgz#fa34a65e806c3d553abbee25f2b8355f47446476"
-  integrity sha512-x7vJawxg04W9CaRVC1rwWgTM+W9266dKoYsxcXFdJ9VwQFcjp59yDOTDd1pLNpZ9mZnBptoll4I/cX5EiydVlg==
+  version "1.1.2"
+  resolved "http://localhost:4873/@lirx/utils/-/utils-1.1.2.tgz#fcd44275563e6bf0ea0672bbf953f56c1fcdf609"
+  integrity sha512-tjVwiDXeEFm/t4sLSCmRbS23mS94g8w6DEF3HGN4JFgwUOLC5eZKBqy2+0F+jNLNVUZSkSCyPj6i+OI7RB9RRQ==

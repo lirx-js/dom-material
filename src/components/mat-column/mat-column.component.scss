@@ -1,0 +1,55 @@
+@use 'mat-column.variables' as mat-column;
+
+:host {
+  display: flex;
+  font-size: 0;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+
+  & > * {
+    width: 100%;
+  }
+
+  & > .content {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    touch-action: none;
+
+    & > .columns {
+      display: inline-flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+
+      position: absolute;
+      $offset-vertical: calc(#{mat-column.$mat-column-padding-y} - #{mat-column.$mat-column-gap-y} * 0.5);
+      $offset-horizontal: calc(#{mat-column.$mat-column-padding-x} - #{mat-column.$mat-column-gap-x} * 0.5);
+      top: #{$offset-vertical};
+      bottom: #{$offset-vertical};
+      left: #{$offset-horizontal};
+      right: #{$offset-horizontal};
+      overflow: visible;
+      transform: translateX(calc((#{mat-column.$mat-column-page} * -100%) + #{mat-column.$mat-column-drag}));
+
+      & > * {
+        width: mat-column.$mat-column-width;
+        padding: calc(#{mat-column.$mat-column-gap-y} * 0.5) calc(#{mat-column.$mat-column-gap-x} * 0.5);
+      }
+    }
+  }
+
+  &:not(.mat--dragging) {
+    & > .content {
+      & > .columns {
+        transition: transform #{mat-column.$mat-column-transition-duration};
+      }
+    }
+  }
+
+  & > .pagination {
+    padding: 5px;
+    border-top: 1px solid mat-column.$mat-column-pagination-border-color;
+    background-color: mat-column.$mat-column-pagination-background-color;
+  }
+}

@@ -37,16 +37,16 @@
     background-color $mat-icon-button-transition-duration;
 
     &:focus-visible {
-      color: $mat-icon-button-color-focused;
-      fill: $mat-icon-button-color-focused;
-      background-color: $mat-icon-button-background-color-focused;
+      color: $mat-icon-button-color--focused;
+      fill: $mat-icon-button-color--focused;
+      background-color: $mat-icon-button-background-color--focused;
     }
 
     @media (hover: hover) {
       &:hover {
-        color: $mat-icon-button-color-hover;
-        fill: $mat-icon-button-color-hover;
-        background-color: $mat-icon-button-background-color-hover;
+        color: $mat-icon-button-color--hover;
+        fill: $mat-icon-button-color--hover;
+        background-color: $mat-icon-button-background-color--hover;
       }
     }
   }
@@ -54,8 +54,8 @@
   &:disabled {
     transition: all 0ms;
     cursor: default;
-    color: $mat-icon-button-color-disabled;
-    fill: $mat-icon-button-color-disabled;
-    background-color: $mat-icon-button-background-color-disabled;
+    color: $mat-icon-button-color--disabled;
+    fill: $mat-icon-button-color--disabled;
+    background-color: $mat-icon-button-background-color--disabled;
   }
 }

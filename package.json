@@ -11,9 +11,13 @@
   "license": "MIT",
   "access": "public",
   "sideEffects": false,
+  "scripts": {
+    "reinstall": "rm -rf ./node_modules && rm -f ./yarn.lock && yarn install"
+  },
   "dependencies": {
     "@lirx/core": "latest",
-    "@lirx/dom": "latest"
+    "@lirx/dom": "latest",
+    "@lirx/mdi": "latest"
   },
   "_dependencies": {
     "@lirx/core": "^1.3.0",

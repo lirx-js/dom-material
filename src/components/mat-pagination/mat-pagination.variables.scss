@@ -1,0 +1,10 @@
+@use '../buttons/mat-button/mat-button.variables' as mat-button;
+
+$mat-pagination-button-content-size: var(--mat-pagination-button-content-size, 28px);
+$mat-pagination-button-padding-y: var(--mat-pagination-button-padding-y, 4px);
+$mat-pagination-button-padding-x: var(--mat-pagination-button-padding-y, 4px);
+
+$mat-pagination-button-color--selected: var(--mat-pagination-button-color--selected, mat-button.$mat-button-color--focused);
+$mat-pagination-button-background-color--selected: var(--mat-pagination-button-background-color--selected, #ccc);
+$mat-pagination-button-border-color--selected: var(--mat-pagination-button-border-color--selected, $mat-pagination-button-background-color--selected);
+

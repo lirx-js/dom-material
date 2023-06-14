@@ -1,10 +1,10 @@
-@import './mat-progress-ring.variables';
+@use './mat-progress-ring.variables' as mat-progress-ring;
 
 :host {
   display: inline-block;
 
   & > svg > circle {
-    stroke: $mat-progress-ring-color;
-    transition: stroke-dashoffset $mat-progress-ring-color;
+    stroke: mat-progress-ring.$mat-progress-ring-color;
+    transition: stroke-dashoffset mat-progress-ring.$mat-progress-ring-color;
   }
 }

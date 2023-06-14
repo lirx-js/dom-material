@@ -10,7 +10,7 @@ export function nodeReferenceModifierFunction(
 }
 
 
-export const NODE_REFERENCE_MODIFIER = createVirtualDOMNodeModifier('ref', nodeReferenceModifierFunction);
+export const NodeReferenceModifier = createVirtualDOMNodeModifier('ref', nodeReferenceModifierFunction);
 
 
 /*--------*/
@@ -28,6 +28,6 @@ export function elementReferenceModifierFunction<GElementNode extends Element>(
 }
 
 
-export const ELEMENT_REFERENCE_MODIFIER = createVirtualDOMNodeModifier<IObserver<Element>, VirtualDOMNode>('refe', elementReferenceModifierFunction);
+export const ElementReferenceModifier = createVirtualDOMNodeModifier<IObserver<Element>, VirtualDOMNode>('refe', elementReferenceModifierFunction);
 
 

@@ -1,0 +1,33 @@
+@use 'mat-loading.variables' as mat-loading;
+
+:host {
+  display: contents;
+  font-size: 0;
+  position: relative;
+
+  & > .loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset: 0;
+    background-color: mat-loading.$mat-loading-loader-background-color;
+    cursor: wait;
+
+    & > mat-dual-ring-loader {
+      --mat-dual-ring-loader-size: calc(min(var(--mat-element-width-px), var(--mat-element-height-px)) * 0.6);
+    }
+  }
+
+  &:not(.mat--loading) {
+    & > .loader {
+      display: none;
+    }
+  }
+
+  &.mat--loading {
+    & > *:not(.loader) {
+      opacity: mat-loading.$mat-loading-opacity-when-loading;
+    }
+  }
+}
