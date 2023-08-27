@@ -1,0 +1,10 @@
+@use '../../../../../../../../../styles/mat-global.variables' as mat-global;
+@use '../../mat-dialog-content.variables' as mat-dialog-content;
+
+$mat-dialog-body-padding-x: var(--mat-dialog-body-padding-x, mat-dialog-content.$mat-dialog-content-padding-x);
+$mat-dialog-body-padding-y: var(--mat-dialog-body-padding-y, mat-dialog-content.$mat-dialog-content-padding-y);
+
+$mat-dialog-body-font-weight: var(--mat-dialog-body-font-weight, normal);
+$mat-dialog-body-font-size: var(--mat-dialog-body-font-size, 16px);
+$mat-dialog-body-font-family: var(--mat-dialog-body-font-family, mat-global.$mat-font-family);
+$mat-dialog-body-color: var(--mat-dialog-body-color, rgb(0 0 0 / 0.75));

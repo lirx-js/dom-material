@@ -15,12 +15,16 @@
     "reinstall": "rm -rf ./node_modules && rm -f ./yarn.lock && yarn install"
   },
   "dependencies": {
+    "@lirx/animations": "latest",
     "@lirx/core": "latest",
     "@lirx/dom": "latest",
-    "@lirx/mdi": "latest"
+    "@lirx/mdi": "latest",
+    "@lirx/utils": "latest",
+    "@lirx/unsubscribe": "latest",
+    "@floating-ui/core": "^1.4.1",
+    "@floating-ui/dom": "^1.5.1"
   },
-  "_dependencies": {
-    "@lirx/core": "^1.3.0",
-    "@lirx/dom": "^0.8.0"
+  "devDependencies": {
+    "@types/jest": "^29.5.3"
   }
 }

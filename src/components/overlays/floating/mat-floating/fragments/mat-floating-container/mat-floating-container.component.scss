@@ -1,0 +1,19 @@
+@use 'mat-floating-container.variables' as mat-floating-container;
+
+/** STYLE **/
+
+:host {
+  display: block;
+
+  position: absolute;
+  inset: 0;
+  background-color: mat-floating-container.$mat-floating-container-backdrop-color;
+
+  pointer-events: auto;
+
+  & > mat-focus-trap {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+}

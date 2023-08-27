@@ -1,26 +1,26 @@
 @use 'mat-button.variables' as mat-button;
 
 
-
 /** STYLE **/
 
 :host {
+  //all: unset;
   display: inline-flex;
   position: relative;
 
   align-items: center;
   justify-content: center;
-  gap: calc(#{mat-button.$mat-button-padding-x} * 0.5);
+  gap: mat-button.$mat-button-gap;
   padding: mat-button.$mat-button-padding-y mat-button.$mat-button-padding-x;
 
   border-width: 1px;
   border-style: solid;
-  border-radius: 4px;
+  border-radius: mat-button.$mat-button-border-radius;
 
   font-family: mat-button.$mat-button-font-family;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 20px;
+  font-size: mat-button.$mat-button-font-size;
+  font-weight: mat-button.$mat-button-font-weight;
+  line-height: mat-button.$mat-button-line-height;
 
   color: mat-button.$mat-button-color;
   fill: mat-button.$mat-button-color;
@@ -32,38 +32,60 @@
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 
-  &:not(:disabled, .mat--disabled, [disabled]) {
-    cursor: pointer;
-    transition: color mat-button.$mat-button-transition-duration,
-    fill mat-button.$mat-button-transition-duration,
-    background-color mat-button.$mat-button-transition-duration,
-    border-color mat-button.$mat-button-transition-duration;
+  & svg {
+    width: mat-button.$mat-button-icon-size;
+    height: mat-button.$mat-button-icon-size;
+  }
+}
 
-    &:focus-visible {
-      color: mat-button.$mat-button-color--focused;
-      fill: mat-button.$mat-button-color--focused;
-      background-color: mat-button.$mat-button-background-color--focused;
-      border-color: mat-button.$mat-button-border-color--focused;
-    }
+$-disabled-selector: ':disabled, .mat--disabled, [disabled]';
+$-not-disabled-selector: ':not(#{$-disabled-selector})';
 
-    @media (hover: hover) {
-      &:hover {
-        color: mat-button.$mat-button-color--hover;
-        fill: mat-button.$mat-button-color--hover;
-        background-color: mat-button.$mat-button-background-color--hover;
-        border-color: mat-button.$mat-button-border-color--hover;
-      }
-    }
+:host(#{$-not-disabled-selector}) {
+  cursor: pointer;
+  transition: color mat-button.$mat-button-transition-duration,
+  fill mat-button.$mat-button-transition-duration,
+  background-color mat-button.$mat-button-transition-duration,
+  border-color mat-button.$mat-button-transition-duration;
+
+  &:focus-visible {
+    color: mat-button.$mat-button-color--focused;
+    fill: mat-button.$mat-button-color--focused;
+    background-color: mat-button.$mat-button-background-color--focused;
+    border-color: mat-button.$mat-button-border-color--focused;
   }
 
-  &:disabled,
-  &.mat--disabled,
-  &[disabled] {
-    transition: all 0ms;
-    cursor: default;
-    color: mat-button.$mat-button-color--disabled;
-    fill: mat-button.$mat-button-color--disabled;
-    background-color: mat-button.$mat-button-background-color--disabled;
-    border-color: mat-button.$mat-button-border-color--disabled;
+  @media (hover: hover) {
+    &:hover {
+      color: mat-button.$mat-button-color--hover;
+      fill: mat-button.$mat-button-color--hover;
+      background-color: mat-button.$mat-button-background-color--hover;
+      border-color: mat-button.$mat-button-border-color--hover;
+    }
   }
+}
+
+:host(#{$-not-disabled-selector}:focus-visible) {
+  color: mat-button.$mat-button-color--focused;
+  fill: mat-button.$mat-button-color--focused;
+  background-color: mat-button.$mat-button-background-color--focused;
+  border-color: mat-button.$mat-button-border-color--focused;
+}
+
+@media (hover: hover) {
+  :host(#{$-not-disabled-selector}:hover) {
+    color: mat-button.$mat-button-color--hover;
+    fill: mat-button.$mat-button-color--hover;
+    background-color: mat-button.$mat-button-background-color--hover;
+    border-color: mat-button.$mat-button-border-color--hover;
+  }
+}
+
+:host(:is(#{$-disabled-selector})) {
+  transition: all 0ms;
+  cursor: default;
+  color: mat-button.$mat-button-color--disabled;
+  fill: mat-button.$mat-button-color--disabled;
+  background-color: mat-button.$mat-button-background-color--disabled;
+  border-color: mat-button.$mat-button-border-color--disabled;
 }

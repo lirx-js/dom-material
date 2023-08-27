@@ -1,0 +1,11 @@
+@use './mat-dialog-header.variables' as mat-dialog-header;
+
+/** STYLE **/
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  //justify-content: space-between;
+  align-items: center;
+  padding: mat-dialog-header.$mat-dialog-header-padding-y mat-dialog-header.$mat-dialog-header-padding-x;
+}

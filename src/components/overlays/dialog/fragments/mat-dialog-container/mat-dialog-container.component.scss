@@ -1,0 +1,24 @@
+@use 'mat-dialog-container.variables' as mat-dialog-container;
+
+
+/** STYLE **/
+
+:host {
+  display: block;
+
+  position: absolute;
+  inset: 0;
+  background-color: mat-dialog-container.$mat-dialog-container-backdrop-color;
+
+  pointer-events: auto;
+
+  & > mat-focus-trap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+  }
+}

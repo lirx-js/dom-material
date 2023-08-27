@@ -1,4 +1,4 @@
-import { conditional$$, fromEventTarget, IObservableLike, map$$, toObservable } from '@lirx/core';
+import { conditional$$, fromEventTarget, IObservableLike, map$$, IObservable, unknownToObservableAny } from '@lirx/core';
 import {
   compileStyleAsComponentStyle,
   createVirtualReactiveElementNodeModifier,
@@ -23,7 +23,7 @@ export function matRippleModifierFunction(
   node: IGenericVirtualReactiveElementNode,
   options?: IObservableLike<IMatRippleOptions>,
 ): VirtualDOMNode {
-  const options$ = toObservable(options);
+  const options$ = unknownToObservableAny(options) as IObservable<IMatRippleOptions | undefined>;
 
   const element: HTMLElement = node.elementNode as HTMLElement;
 
@@ -53,7 +53,7 @@ export function matRippleModifierFunction(
         }
       }
 
-      const color: string = getElementCSSVariableValueOrDefault(element, '--mat-ripple-color', 'rgba(0, 0, 0, 0.1)');
+      const color: string = getElementCSSVariableValueOrDefault(element, '--mat-ripple-color', 'rgb(0 0 0 / 0.1)');
       const openDuration: number = Number(getElementCSSVariableValueOrDefault(element, '--mat-ripple-open-duration', '200'));
       const closeDuration: number = Number(getElementCSSVariableValueOrDefault(element, '--mat-ripple-close-duration', '200'));
 

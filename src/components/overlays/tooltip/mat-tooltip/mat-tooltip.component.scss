@@ -1,0 +1,127 @@
+@use 'mat-tooltip.variables' as mat-tooltip-content;
+@use 'sass:math' as math;
+
+/** STYLE **/
+
+$-absolute-min-size: calc(#{mat-tooltip-content.$mat-tooltip-arrow-size} * #{math.sqrt(2)} + 8px /* border-radius */
+);
+$-min-size: max(calc((#{mat-tooltip-content.$mat-tooltip-arrow-offset-cross-axis} * 2)), #{$-absolute-min-size});
+$-arrow-offset: calc((#{mat-tooltip-content.$mat-tooltip-arrow-size} * -0.5));
+$-arrow-offset-cross-axis: calc(#{mat-tooltip-content.$mat-tooltip-arrow-offset-cross-axis} + #{$-arrow-offset});
+$-arrow-offset-main-axis: $-arrow-offset;
+
+$-initial-arrow-rotation: -45deg;
+$-mat-floating-content-selector: 'mat-floating-content';
+
+
+:host {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 6px;
+
+  background-color: mat-tooltip-content.$mat-tooltip-background-color;
+  box-shadow: 0 0 #{mat-tooltip-content.$mat-tooltip-shadow-size} #{mat-tooltip-content.$mat-tooltip-shadow-color};
+  border-radius: 4px;
+
+  min-width: $-absolute-min-size;
+  min-height: $-absolute-min-size;
+  max-height: inherit;
+  max-width: inherit;
+
+  overflow: auto;
+
+  font-size: 16px;
+  line-height: 20px;
+  color: mat-tooltip-content.$mat-tooltip-color;
+
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: mat-tooltip-content.$mat-tooltip-arrow-size;
+    height: mat-tooltip-content.$mat-tooltip-arrow-size;
+    transform-origin: center center;
+    rotate: $-initial-arrow-rotation;
+    background-color: mat-tooltip-content.$mat-tooltip-background-color;
+    box-shadow: 0 0 #{mat-tooltip-content.$mat-tooltip-shadow-size} #{mat-tooltip-content.$mat-tooltip-shadow-color};
+    clip-path: polygon(
+            calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1) calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1),
+            calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size}) calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1),
+            calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size}) calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size})
+    );
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}[placement^='left']) {
+  &::before {
+    rotate: $-initial-arrow-rotation + 90deg;
+    right: $-arrow-offset-main-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}[placement^='right']) {
+  &::before {
+    rotate: $-initial-arrow-rotation - 90deg;
+    left: $-arrow-offset-main-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement='left'], [placement='right'])) {
+  &::before {
+    top: calc(50% + $-arrow-offset);
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='left-'], [placement^='right-'])) {
+  min-height: $-min-size;
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='left-'], [placement^='right-'])[placement$='start']) {
+  &::before {
+    top: $-arrow-offset-cross-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='left-'], [placement^='right-'])[placement$='end']) {
+  &::before {
+    bottom: $-arrow-offset-cross-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}[placement^='top']) {
+  &::before {
+    rotate: $-initial-arrow-rotation + 180deg;
+    bottom: $-arrow-offset-main-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}[placement^='bottom']) {
+  &::before {
+    rotate: $-initial-arrow-rotation;
+    top: $-arrow-offset-main-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement='top'], [placement='bottom'])) {
+  &::before {
+    left: calc(50% + $-arrow-offset);
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='top-'], [placement^='bottom-'])) {
+  min-width: $-min-size;
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='top-'], [placement^='bottom-']):is([placement$='start']:dir(ltr), [placement$='end']:dir(rtl))) {
+  &::before {
+    left: $-arrow-offset-cross-axis;
+  }
+}
+
+:host-context(#{$-mat-floating-content-selector}:is([placement^='top-'], [placement^='bottom-']):is([placement$='start']:dir(rtl), [placement$='end']:dir(ltr))) {
+  &::before {
+    right: $-arrow-offset-cross-axis;
+  }
+}

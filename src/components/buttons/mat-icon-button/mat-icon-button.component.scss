@@ -11,8 +11,5 @@
 
   font-size: 0;
 
-  & > svg {
-    width: mat-icon-button.$mat-icon-button-icon-size;
-    height: mat-icon-button.$mat-icon-button-icon-size;
-  }
+  --mat-button-icon-size: #{mat-icon-button.$mat-icon-button-icon-size};
 }

@@ -21,6 +21,8 @@
       display: inline-flex;
       flex-wrap: wrap;
       flex-direction: column;
+      align-items: flex-start;
+      align-content: flex-start;
 
       position: absolute;
       $offset-vertical: calc(#{mat-column.$mat-column-padding-y} - #{mat-column.$mat-column-gap-y} * 0.5);
@@ -39,17 +41,17 @@
     }
   }
 
-  &:not(.mat--dragging) {
-    & > .content {
-      & > .columns {
-        transition: transform #{mat-column.$mat-column-transition-duration};
-      }
-    }
-  }
-
   & > .pagination {
     padding: 5px;
     border-top: 1px solid mat-column.$mat-column-pagination-border-color;
     background-color: mat-column.$mat-column-pagination-background-color;
+  }
+}
+
+:host(:not(.mat--dragging)) {
+  & > .content {
+    & > .columns {
+      transition: transform #{mat-column.$mat-column-transition-duration};
+    }
   }
 }

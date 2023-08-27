@@ -16,7 +16,7 @@
     background-color: mat-progress-bar.$mat-progress-bar-color;
   }
 
-  &.mat-with-animation {
+  &.mat--with-animation {
     transition: width 500ms;
   }
 }

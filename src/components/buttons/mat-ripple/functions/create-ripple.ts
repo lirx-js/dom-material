@@ -49,7 +49,7 @@ export function createRipple(
   styleDeclaration.setProperty('height', size);
   styleDeclaration.setProperty('background-color', color);
   styleDeclaration.setProperty('border-radius', '50%');
-  // styleDeclaration.setProperty('box-shadow', 'inset 0 0 20% 0 rgba(0, 0, 0, 0.15)');
+  // styleDeclaration.setProperty('box-shadow', 'inset 0 0 20% 0 rgb(0 0 0 / 0.15)');
 
   let state: IRippleState = 'closed';
 

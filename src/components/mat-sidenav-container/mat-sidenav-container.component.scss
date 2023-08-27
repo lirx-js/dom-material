@@ -44,7 +44,7 @@
 
   &.mat-has-backdrop {
     & > .backdrop {
-      background-color: rgba(black, 0.6);
+      background-color: rgb(0 0 0 / 0.6);
       opacity: 0;
       transition: opacity mat-sidenav-container.$mat-sidenav-container-transition-duration;
       //will-change: opacity;

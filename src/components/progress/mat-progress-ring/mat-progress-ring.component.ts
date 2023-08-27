@@ -2,9 +2,11 @@ import { function$$, IObservable, map$$ } from '@lirx/core';
 import {
   compileReactiveHTMLAsComponentTemplate,
   compileStyleAsComponentStyle,
-  createComponent,
   ISetStylePropertyOrStringOrNull,
-  VirtualCustomElementNode,
+  VirtualComponentNode,
+  Input,
+  Component,
+  input,
 } from '@lirx/dom';
 
 // @ts-ignore
@@ -19,7 +21,13 @@ import style from './mat-progress-ring.component.scss?inline';
  * COMPONENT: 'mat-progress-ring'
  */
 
-interface IData {
+export interface IMatProgressRingComponentData {
+  readonly progress: Input<number>;
+  readonly radius: Input<number>;
+  readonly stroke: Input<number>;
+}
+
+interface ITemplateData {
   readonly strokeWidth$: IObservable<number>;
   readonly strokeDashOffset$: IObservable<ISetStylePropertyOrStringOrNull>;
   readonly strokeDashArray$: IObservable<string>;
@@ -29,30 +37,23 @@ interface IData {
   readonly transform$: IObservable<string>;
 }
 
-interface IMatProgressRingComponentConfig {
-  inputs: [
-    ['progress', number],
-    ['radius', number],
-    ['stroke', number],
-  ];
-  data: IData;
-}
-
-export const MatProgressRingComponent = createComponent<IMatProgressRingComponentConfig>({
+export const MatProgressRingComponent = new Component<HTMLElement, IMatProgressRingComponentData, ITemplateData>({
   name: 'mat-progress-ring',
   template: compileReactiveHTMLAsComponentTemplate({
     html,
   }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['progress', 0],
-    ['radius', 0],
-    ['stroke', 0],
-  ],
-  init: (node: VirtualCustomElementNode<IMatProgressRingComponentConfig>): IData => {
-    const progress$ = node.inputs.get$('progress');
-    const radius$ = node.inputs.get$('radius');
-    const stroke$ = node.inputs.get$('stroke');
+  componentData: (): IMatProgressRingComponentData => {
+    return {
+      progress: input<number>(0),
+      radius: input<number>(0),
+      stroke: input<number>(0),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatProgressRingComponentData>): ITemplateData => {
+    const progress$ = node.input$('progress');
+    const radius$ = node.input$('radius');
+    const stroke$ = node.input$('stroke');
 
     /** SETUP SUBSCRIBE FUNCTIONS **/
 

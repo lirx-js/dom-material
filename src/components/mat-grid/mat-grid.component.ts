@@ -12,10 +12,12 @@ import {
 } from '@lirx/core';
 import {
   compileStyleAsComponentStyle,
-  createComponent,
   INJECT_CONTENT_TEMPLATE,
   ISetStylePropertyOrStringOrNull,
-  VirtualCustomElementNode,
+  VirtualComponentNode,
+  Component,
+  Input,
+  input,
 } from '@lirx/dom';
 import { INullish, isNullish } from '@lirx/utils';
 import { getBoxFromMatGridItemList } from './fragments/mat-grid-item/helpers/get-box-from-mat-grid-item-list';
@@ -39,27 +41,26 @@ export type IMatGridRows =
   | 'auto'
   ;
 
-interface IMatGridComponentConfig {
-  element: HTMLElement;
-  inputs: [
-    ['columns', IMatGridColumns],
-    ['rows', IMatGridRows],
-  ],
+export interface IMatGridComponentData {
+  readonly columns: Input<IMatGridColumns>;
+  readonly rows: Input<IMatGridRows>;
 }
 
-export const MatGridComponent = createComponent<IMatGridComponentConfig>({
+export const MatGridComponent = new Component<HTMLElement, IMatGridComponentData, object>({
   name: 'mat-grid',
   template: INJECT_CONTENT_TEMPLATE,
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['columns', void 0],
-    ['rows', 'auto'],
-  ],
-  init: (node: VirtualCustomElementNode<IMatGridComponentConfig>): void => {
+  componentData: (): IMatGridComponentData => {
+    return {
+      columns: input<IMatGridColumns>(void 0),
+      rows: input<IMatGridRows>('auto'),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatGridComponentData>): void => {
 
     /* COLUMNS */
 
-    const columns$ = node.inputs.get$('columns');
+    const columns$ = node.input$('columns');
 
     const _columns$ = map$$(columns$, (columns: number | INullish): ISetStylePropertyOrStringOrNull => {
       return isNullish(columns)
@@ -71,7 +72,7 @@ export const MatGridComponent = createComponent<IMatGridComponentConfig>({
 
     /* ROWS */
 
-    const rows$ = node.inputs.get$('rows');
+    const rows$ = node.input$('rows');
 
     const childrenChange$ = debounceFrame$$(
       merge([

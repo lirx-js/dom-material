@@ -23,8 +23,16 @@ import {
   switchMap$$$,
   toString$$,
 } from '@lirx/core';
-import { compileReactiveHTMLAsComponentTemplate, compileStyleAsComponentStyle, createComponent, VirtualCustomElementNode } from '@lirx/dom';
+import {
+  compileReactiveHTMLAsComponentTemplate,
+  compileStyleAsComponentStyle,
+  VirtualComponentNode,
+  Component,
+  Input,
+  input,
+} from '@lirx/dom';
 import { noop } from '@lirx/utils';
+import { IUnsubscribe } from '@lirx/unsubscribe';
 import { ElementReferenceModifier } from '../../modifiers/node-reference.modifier';
 import { IBuildMatPaginationParamsOptions } from '../mat-pagination/helpers/build-mat-pagination-params';
 import { buildReactiveMatPaginationParams } from '../mat-pagination/helpers/build-reactive-mat-pagination-params';
@@ -40,26 +48,22 @@ import style from './mat-column.component.scss?inline';
  * COMPONENT: 'mat-column'
  */
 
-interface IData {
+export interface IMatColumnComponentData {
+  readonly minColumnWidth: Input<number>;
+}
+
+interface ITemplateData {
   readonly $contentElement: IObserver<HTMLElement>;
   readonly $columnsElement: IObserver<HTMLElement>;
   readonly paginationItems$: IObservable<readonly IMatPaginationItem[]>;
   readonly $selectedPageIndex: IObservable<IObserver<number>>;
 }
 
-interface IMatColumnComponentConfig {
-  element: HTMLElement;
-  inputs: [
-    ['minColumnWidth', number],
-  ];
-  data: IData;
-}
-
-export const MatColumnComponent = createComponent<IMatColumnComponentConfig>({
+export const MatColumnComponent = new Component<HTMLElement, IMatColumnComponentData, ITemplateData>({
   name: 'mat-column',
   template: compileReactiveHTMLAsComponentTemplate({
     html,
-    customElements: [
+    components: [
       MatPaginationComponent,
     ],
     modifiers: [
@@ -67,10 +71,12 @@ export const MatColumnComponent = createComponent<IMatColumnComponentConfig>({
     ],
   }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['minColumnWidth'],
-  ],
-  init: (node: VirtualCustomElementNode<IMatColumnComponentConfig>): IData => {
+  componentData: (): IMatColumnComponentData => {
+    return {
+      minColumnWidth: input<number>(),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatColumnComponentData>): ITemplateData => {
     const [$contentElement, contentElement$] = let$$<HTMLElement>();
     const [$columnsElement, columnsElement$] = let$$<HTMLElement>();
 
@@ -91,7 +97,7 @@ export const MatColumnComponent = createComponent<IMatColumnComponentConfig>({
 
     /* COLUMN WIDTH */
 
-    const minColumnWidth$ = node.inputs.get$('minColumnWidth');
+    const minColumnWidth$ = node.input$('minColumnWidth');
 
     const columnWidth$ = function$$(
       [minColumnWidth$, sharedWidth$],
@@ -185,7 +191,9 @@ export const MatColumnComponent = createComponent<IMatColumnComponentConfig>({
       ]);
     });
 
-    node.onConnected$(updatePageSelectedOnDragEnd$)(noop);
+    node.onConnected((): IUnsubscribe => {
+      return updatePageSelectedOnDragEnd$(noop);
+    });
 
     return {
       $contentElement,

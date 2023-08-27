@@ -1,0 +1,20 @@
+@use 'mat-dialog-content.variables' as mat-dialog-content;
+
+
+/** STYLE **/
+
+:host {
+  display: flex;
+  flex-direction: column;
+  position: static;
+  pointer-events: auto;
+
+  max-width: min(#{mat-dialog-content.$mat-dialog-content-max-width}, calc(100% - #{mat-dialog-content.$mat-dialog-content-margin-x}));
+  max-height: min(#{mat-dialog-content.$mat-dialog-content-max-height}, calc(100% - #{mat-dialog-content.$mat-dialog-content-margin-y}));
+
+  overflow: hidden;
+
+  background-color: mat-dialog-content.$mat-dialog-content-background-color;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 0.15);
+  border-radius: 4px;
+}

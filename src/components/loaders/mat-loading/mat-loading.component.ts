@@ -1,4 +1,11 @@
-import { compileReactiveHTMLAsComponentTemplate, compileStyleAsComponentStyle, createComponent, VirtualCustomElementNode } from '@lirx/dom';
+import {
+  compileReactiveHTMLAsComponentTemplate,
+  compileStyleAsComponentStyle,
+  Component,
+  Input,
+  input,
+  VirtualComponentNode,
+} from '@lirx/dom';
 import { CssVarsSizeModifier } from '../../../modifiers/css-vars-size.modifier';
 import { MatDualRingLoaderComponent } from '../mat-dual-ring-loader/mat-dual-ring-loader.component';
 
@@ -11,18 +18,15 @@ import style from './mat-loading.component.scss?inline';
  * COMPONENT: 'mat-loading'
  **/
 
-interface IMatLoadingComponentConfig {
-  element: HTMLElement;
-  inputs: [
-    ['loading', boolean],
-  ],
+export interface IMatLoadingComponentData {
+  readonly loading: Input<boolean>;
 }
 
-export const MatLoadingComponent = createComponent<IMatLoadingComponentConfig>({
+export const MatLoadingComponent = new Component<HTMLElement, IMatLoadingComponentData, object>({
   name: 'mat-loading',
   template: compileReactiveHTMLAsComponentTemplate({
     html,
-    customElements: [
+    components: [
       MatDualRingLoaderComponent,
     ],
     modifiers: [
@@ -30,11 +34,13 @@ export const MatLoadingComponent = createComponent<IMatLoadingComponentConfig>({
     ],
   }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['loading', false],
-  ],
-  init: (node: VirtualCustomElementNode<IMatLoadingComponentConfig>): void => {
-    const loading$ = node.inputs.get$('loading');
+  componentData: (): IMatLoadingComponentData => {
+    return {
+      loading: input<boolean>(false),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatLoadingComponentData>): void => {
+    const loading$ = node.input$('loading');
 
     node.setReactiveClass('mat--loading', loading$);
   },

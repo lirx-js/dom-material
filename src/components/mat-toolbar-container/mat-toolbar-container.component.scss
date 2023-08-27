@@ -26,26 +26,26 @@
   & > .content {
     overflow: auto;
   }
+}
 
-  &.mat-position-top {
-    & > .toolbar {
-      top: 0;
-    }
-
-    & > .content {
-      top: mat-toolbar-container.$mat-toolbar-container-toolbar-height;
-      bottom: 0;
-    }
+:host(.mat--position-top) {
+  & > .toolbar {
+    top: 0;
   }
 
-  &.mat-position-bottom {
-    & > .toolbar {
-      bottom: 0;
-    }
+  & > .content {
+    top: mat-toolbar-container.$mat-toolbar-container-toolbar-height;
+    bottom: 0;
+  }
+}
 
-    & > .content {
-      top: 0;
-      bottom: mat-toolbar-container.$mat-toolbar-container-toolbar-height;
-    }
+:host(.mat--position-bottom) {
+  & > .toolbar {
+    bottom: 0;
+  }
+
+  & > .content {
+    top: 0;
+    bottom: mat-toolbar-container.$mat-toolbar-container-toolbar-height;
   }
 }

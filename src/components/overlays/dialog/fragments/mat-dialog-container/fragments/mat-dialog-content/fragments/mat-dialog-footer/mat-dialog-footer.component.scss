@@ -1,0 +1,25 @@
+@use './mat-dialog-footer.variables' as mat-dialog-footer;
+
+/** STYLE **/
+
+:host {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  padding: mat-dialog-footer.$mat-dialog-footer-padding-y mat-dialog-footer.$mat-dialog-footer-padding-x;
+  gap: 6px;
+}
+
+:host(.mat--start) {
+  justify-content: flex-start;
+
+}
+
+:host(.mat--center) {
+  justify-content: center;
+}
+
+:host(.mat--end) {
+  justify-content: flex-end;
+}

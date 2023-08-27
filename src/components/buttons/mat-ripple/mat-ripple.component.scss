@@ -1,4 +1,3 @@
-
 /** STYLE **/
 
 :host {
@@ -12,16 +11,16 @@
       transform: translateZ(0);
     }
   }
+}
 
-  &:not(.mat-unbounded) {
-    & > .mat-ripples-container {
-      overflow: hidden;
-    }
+:host(:not(.mat--unbounded)) {
+  & > .mat-ripples-container {
+    overflow: hidden;
   }
+}
 
-  &:disabled {
-    & > .mat-ripples-container {
-      display: none;
-    }
+:host(:disabled) {
+  & > .mat-ripples-container {
+    display: none;
   }
 }

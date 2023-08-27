@@ -53,11 +53,10 @@
       }
     }
   }
+}
 
-
-  &.mat--disabled {
-    opacity: 0.5;
-    pointer-events: none;
-    cursor: default;
-  }
+:host(.mat--disabled) {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: default;
 }

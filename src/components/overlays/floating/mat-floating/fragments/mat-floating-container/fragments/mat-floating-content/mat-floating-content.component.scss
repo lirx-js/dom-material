@@ -1,0 +1,17 @@
+@use 'mat-floating-content.variables' as mat-floating-content;
+@use '../../../../mat-floating.variables' as mat-floating;
+
+/** STYLE **/
+
+:host {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: max-content;
+  pointer-events: auto;
+
+  translate: #{mat-floating.$mat-floating-x} #{mat-floating.$mat-floating-y};
+  max-width: #{mat-floating.$mat-floating-max-width};
+  max-height: #{mat-floating.$mat-floating-max-height};
+}

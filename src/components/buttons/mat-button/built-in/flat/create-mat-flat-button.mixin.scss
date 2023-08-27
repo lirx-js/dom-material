@@ -16,11 +16,11 @@
   --mat-button-background-color--focused: #{mat-global-functions.change-color-lightness($color-raw, -20%)};
   --mat-button-border-color--focused: #{mat-global-functions.change-color-lightness($color-raw, -20%)};
 
-  $color--disabled: rgba(black, 0.26);
-  --mat-button-color--disabled:$color--disabled;
+  $color--disabled: rgb(0 0 0 / 0.26);
+  --mat-button-color--disabled: $color--disabled;
   --mat-button-background-color--disabled: $color--disabled;
   --mat-button-border-color--disabled: $color--disabled;
 
-  --mat-ripple-color: #{rgba(white, 0.15)};
+  --mat-ripple-color: #{rgb(255 255 255 / 0.15)};
 }
 

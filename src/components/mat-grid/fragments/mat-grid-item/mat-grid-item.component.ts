@@ -1,5 +1,5 @@
 import { mapDistinct$$ } from '@lirx/core';
-import { compileStyleAsComponentStyle, createComponent, INJECT_CONTENT_TEMPLATE, VirtualCustomElementNode } from '@lirx/dom';
+import { compileStyleAsComponentStyle, INJECT_CONTENT_TEMPLATE, VirtualComponentNode, Input, Component, input } from '@lirx/dom';
 import { IMatGridItemPosition } from './helpers/mat-grid-item-position.type';
 
 // @ts-ignore
@@ -9,22 +9,21 @@ import style from './mat-grid-item.component.scss?inline';
  * COMPONENT: 'app-grid-item'
  **/
 
-interface IGridItemComponentConfig {
-  element: HTMLElement;
-  inputs: [
-    ['position', IMatGridItemPosition],
-  ];
+export interface IGridItemComponentData {
+  readonly position: Input<IMatGridItemPosition>;
 }
 
-export const MatGridItemComponent = createComponent<IGridItemComponentConfig>({
+export const MatGridItemComponent = new Component<HTMLElement, IGridItemComponentData, object>({
   name: 'mat-grid-item',
   template: INJECT_CONTENT_TEMPLATE,
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['position'],
-  ],
-  init: (node: VirtualCustomElementNode<IGridItemComponentConfig>): void => {
-    const position$ = node.inputs.get$('position');
+  componentData: (): IGridItemComponentData => {
+    return {
+      position: input<IMatGridItemPosition>(),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IGridItemComponentData>): void => {
+    const position$ = node.input$('position');
 
     const left$ = mapDistinct$$(position$, ([left]) => String(left));
     const top$ = mapDistinct$$(position$, ([, top]) => String(top));

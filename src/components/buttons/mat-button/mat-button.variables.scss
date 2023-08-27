@@ -3,11 +3,17 @@
 $mat-button-transition-duration: var(--mat-button-transition-duration, 250ms);
 
 $mat-button-font-family: var(--mat-button-font-family, mat-global.$mat-font-family);
+$mat-button-font-size: var(--mat-button-font-size, 14px);
+$mat-button-font-weight: var(--mat-button-font-weight, 500);
+$mat-button-line-height: var(--mat-button-line-weight, 20px);
+$mat-button-icon-size: var(--mat-button-icon-size, $mat-button-line-height);
 
 $mat-button-padding-y: var(--mat-button-padding-y, 8px);
 $mat-button-padding-x: var(--mat-button-padding-x, 16px);
+$mat-button-gap: var(--mat-button-gap, calc(#{$mat-button-padding-x} * 0.4));
+$mat-button-border-radius: var(--mat-button-border-radius, 4px);
 
-$mat-button-color: var(--mat-button-color, rgba(black, 0.87));
+$mat-button-color: var(--mat-button-color, rgb(0 0 0 / 0.87));
 $mat-button-background-color: var(--mat-button-background-color, transparent);
 //$mat-button-background-color: var(--mat-button-background-color, #ddd);
 $mat-button-border-color: var(--mat-button-border-color, $mat-button-background-color);
@@ -20,7 +26,7 @@ $mat-button-color--focused: var(--mat-button-color--focused, $mat-button-color);
 $mat-button-background-color--focused: var(--mat-button-background-color--focused, #ddd);
 $mat-button-border-color--focused: var(--mat-button-border-color--focused, $mat-button-background-color--focused);
 
-$mat-button-color--disabled: var(--mat-button-color--disabled, rgba(black, 0.26));
+$mat-button-color--disabled: var(--mat-button-color--disabled, rgb(0 0 0 / 0.26));
 $mat-button-background-color--disabled: var(--mat-button-background-color--disabled, $mat-button-background-color);
 $mat-button-border-color--disabled: var(--mat-button-border-color--disabled, $mat-button-background-color--disabled);
 

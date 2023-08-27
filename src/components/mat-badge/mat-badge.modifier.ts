@@ -1,4 +1,4 @@
-import { IObservableLike, map$$, toObservable } from '@lirx/core';
+import { IObservableLike, map$$, IObservable, unknownToObservableAny } from '@lirx/core';
 import {
   compileStyleAsComponentStyle,
   createVirtualReactiveElementNodeModifier,
@@ -11,20 +11,18 @@ import style from './mat-badge.component.scss?inline';
 
 const componentStyle = compileStyleAsComponentStyle(style);
 
-
 export type IMatBadgeContent =
   | string
   | number
   ;
 
 export function matBadgeContentToString(
-  content: IMatBadgeContent
+  content: IMatBadgeContent,
 ): string {
   return (typeof content === 'number')
     ? content.toString(10)
     : content;
 }
-
 
 export interface IMatBadgeOptions {
   content: IMatBadgeContent;
@@ -44,16 +42,15 @@ export function matBadgeParamToContent(
     : matBadgeContentToString(params);
 }
 
-
 export function matBadgeModifierFunction(
   node: IGenericVirtualReactiveElementNode,
   params?: IObservableLike<IMatBadgeParam>,
 ): VirtualDOMNode {
-  const params$ = toObservable(params);
+  const params$ = unknownToObservableAny(params) as IObservable<IMatBadgeParam | undefined>;
 
   const content$ = map$$(params$, matBadgeParamToContent);
 
-  const matBadContentCssVariable$ =  map$$(content$, _ => JSON.stringify(_));
+  const matBadContentCssVariable$ = map$$(content$, _ => JSON.stringify(_));
 
   node.setReactiveStyleProperty('--mat-badge-content', matBadContentCssVariable$);
 

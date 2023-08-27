@@ -1,8 +1,5 @@
 import { fromResizeObserver, map$$, shareRL$$ } from '@lirx/core';
-import { createVirtualReactiveElementNodeModifier, VirtualDOMNode } from '@lirx/dom';
-import {
-  IGenericVirtualReactiveElementNode,
-} from '@lirx/dom/src/dom-manipulation/virtual-nodes/virtual-reactive-element-node/generic-virtual-reactive-element-node.type';
+import { createVirtualReactiveElementNodeModifier, VirtualDOMNode, IGenericVirtualReactiveElementNode } from '@lirx/dom';
 
 export function cssVarsSizeModifierFunction(
   node: IGenericVirtualReactiveElementNode,

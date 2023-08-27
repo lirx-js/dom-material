@@ -1,0 +1,25 @@
+<mat-dialog-container
+  $(close)="$.$matDialogContainerClose"
+>
+  <mat-dialog-content>
+    <mat-dialog-header>
+      <mat-dialog-title
+        *if="slots.has('title')"
+        *inject-slot="title"
+      ></mat-dialog-title>
+      <mat-dialog-close
+        (click)="$.$onClickCloseIcon"
+      ></mat-dialog-close>
+    </mat-dialog-header>
+
+    <mat-dialog-body
+      *if="slots.has('content')"
+      *inject-slot="content"
+    ></mat-dialog-body>
+
+    <mat-dialog-footer
+      *if="slots.has('actions')"
+      *inject-slot="actions"
+    ></mat-dialog-footer>
+  </mat-dialog-content>
+</mat-dialog-container>

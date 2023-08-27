@@ -1,2 +1,0 @@
-export * from './mat-progress-bar/index';
-export * from './mat-progress-ring/index';

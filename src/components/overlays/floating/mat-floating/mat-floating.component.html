@@ -1,0 +1,14 @@
+<mat-floating-container
+  *if="$.matOverlayReady$"
+  $(close)="$.$onMatFloatingContainerClose"
+>
+  <mat-floating-content
+    #refe="$.$matFloatingContentElement"
+  >
+    <rx-inject-slot
+      name="*"
+      let-overlay="$.getMatOverlay()"
+    ></rx-inject-slot>
+  </mat-floating-content>
+</mat-floating-container>
+

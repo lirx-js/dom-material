@@ -12,7 +12,7 @@
 
   @include mat-badge.mat-badge-position(mat-badge.$mat-badge-size);
 
-  &.mat-badge-dot {
+  &.mat--dot {
     @include mat-badge.mat-badge-position(mat-badge.$mat-badge-size-dot);
 
     &::after {
@@ -23,7 +23,7 @@
     }
   }
 
-  &:not(.mat-badge-dot) {
+  &:not(.mat--dot) {
     &::after {
       height: mat-badge.$mat-badge-size;
       line-height: mat-badge.$mat-badge-size;
@@ -44,3 +44,4 @@
     }
   }
 }
+

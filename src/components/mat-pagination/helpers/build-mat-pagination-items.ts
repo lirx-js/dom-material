@@ -1,9 +1,12 @@
 import {
-  IMatPaginationItem, IMatPaginationItemButton,
-  IMatPaginationItemEllipsis, IMatPaginationItemFirst,
+  IMatPaginationItem,
+  IMatPaginationItemButton,
+  IMatPaginationItemEllipsis,
+  IMatPaginationItemFirst,
   IMatPaginationItemLast,
   IMatPaginationItemNext,
-  IMatPaginationItemPage, IMatPaginationItemPrevious,
+  IMatPaginationItemPage,
+  IMatPaginationItemPrevious,
 } from '../types/mat-pagination-item.type';
 
 export interface IBuildMatPaginationItemsOptions {

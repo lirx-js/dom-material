@@ -18,16 +18,17 @@
       --mat-dual-ring-loader-size: calc(min(var(--mat-element-width-px), var(--mat-element-height-px)) * 0.6);
     }
   }
+}
 
-  &:not(.mat--loading) {
-    & > .loader {
-      display: none;
-    }
+
+:host(:not(.mat--loading)) {
+  & > .loader {
+    display: none;
   }
+}
 
-  &.mat--loading {
-    & > *:not(.loader) {
-      opacity: mat-loading.$mat-loading-opacity-when-loading;
-    }
+:host(.mat--loading) {
+  & > *:not(.loader) {
+    opacity: mat-loading.$mat-loading-opacity-when-loading;
   }
 }

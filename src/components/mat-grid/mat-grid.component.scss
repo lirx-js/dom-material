@@ -25,7 +25,7 @@
     overflow: hidden;
 
     $width: calc((#{$item-width-including-gap} * #{mat-grid.$mat-grid-item-width}) - #{mat-grid.$mat-grid-gap-x});
-    $left: calc(#{$item-width-including-gap} *  #{mat-grid.$mat-grid-item-left});
+    $left: calc(#{$item-width-including-gap} * #{mat-grid.$mat-grid-item-left});
 
     $height: calc((#{$item-height-including-gap} * #{mat-grid.$mat-grid-item-height}) - #{mat-grid.$mat-grid-gap-y});
     $top: calc(#{$item-height-including-gap} * #{mat-grid.$mat-grid-item-top});

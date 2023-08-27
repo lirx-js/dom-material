@@ -2,11 +2,15 @@ import { function$$, IObservable, IObserver, let$$ } from '@lirx/core';
 import {
   compileReactiveHTMLAsComponentTemplate,
   compileStyleAsComponentStyle,
-  createComponent,
   querySelectorOrThrow,
-  VirtualCustomElementNode,
+  VirtualComponentNode,
+  Component,
+  Input,
+  Output,
+  input,
+  output,
 } from '@lirx/dom';
-
+import { IUnsubscribe } from '@lirx/unsubscribe';
 
 // @ts-ignore
 import html from './mat-sidenav-container.component.html?raw';
@@ -37,52 +41,47 @@ export type IMatSidenavComponentUserCloseType =
  * COMPONENT: 'mat-sidenav-container'
  */
 
-interface IData {
+export interface IMatSidenavContainerComponentData {
+  readonly mode: Input<IMatSidenavComponentMode>;
+  readonly position: Input<IMatSidenavComponentPosition>;
+  readonly hasBackdrop: Input<boolean>;
+  readonly enableUserClose: Input<boolean>;
+  readonly opened: Input<boolean>;
+  readonly userClose: Output<IMatSidenavComponentUserCloseType>;
+}
+
+interface ITemplateData {
   readonly hasBackdrop$: IObservable<boolean>;
   readonly $onClickBackdrop: IObserver<MouseEvent>;
   readonly $onClickDrag: IObserver<MouseEvent>;
   readonly $onKeyDownSidenav: IObserver<KeyboardEvent>;
 }
 
-interface IMatSidenavContainerComponentConfig {
-  inputs: [
-    ['mode', IMatSidenavComponentMode],
-    ['position', IMatSidenavComponentPosition],
-    ['hasBackdrop', boolean],
-    ['enableUserClose', boolean],
-    ['opened', boolean],
-  ];
-  outputs: [
-    ['userClose', IMatSidenavComponentUserCloseType],
-  ],
-  data: IData;
-}
-
-export const MatSidenavContainerComponent = createComponent<IMatSidenavContainerComponentConfig>({
+export const MatSidenavContainerComponent = new Component<HTMLElement, IMatSidenavContainerComponentData, ITemplateData>({
   name: 'mat-sidenav-container',
   template: compileReactiveHTMLAsComponentTemplate({ html }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['mode', 'over'],
-    ['position', 'left'],
-    ['hasBackdrop', true],
-    ['enableUserClose', false],
-    ['opened', false],
-  ],
-  outputs: [
-    'userClose',
-  ],
-  init: (node: VirtualCustomElementNode<IMatSidenavContainerComponentConfig>): IData => {
+  componentData: (): IMatSidenavContainerComponentData => {
+    return {
+      mode: input<IMatSidenavComponentMode>('over'),
+      position: input<IMatSidenavComponentPosition>('left'),
+      hasBackdrop: input<boolean>(true),
+      enableUserClose: input<boolean>(false),
+      opened: input<boolean>(false),
+      userClose: output<IMatSidenavComponentUserCloseType>(),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatSidenavContainerComponentData>): ITemplateData => {
     const element: HTMLElement = node.elementNode;
 
-    const enableUserClose = () => node.inputs.get('enableUserClose');
-    const mode$ = node.inputs.get$('mode');
-    const position$ = node.inputs.get$('position');
-    const hasBackdrop$ = node.inputs.get$('hasBackdrop');
+    const enableUserClose = () => node.input$('enableUserClose');
+    const mode$ = node.input$('mode');
+    const position$ = node.input$('position');
+    const hasBackdrop$ = node.input$('hasBackdrop');
 
     const [$opened, opened$, opened] = let$$<boolean>();
 
-    node.inputs.get$('opened')($opened);
+    node.input$('opened')($opened);
 
     // const {
     //   emit: $opened,
@@ -90,7 +89,7 @@ export const MatSidenavContainerComponent = createComponent<IMatSidenavContainer
     //   getValue: opened,
     // } = node.inputs.get$('opened');
 
-    const $userClose = node.outputs.$set('userClose');
+    const $userClose = node.$output('userClose');
 
     node.setReactiveClass('mat--opened', opened$);
     node.setReactiveClass('mat-has-backdrop', hasBackdrop$);
@@ -130,12 +129,14 @@ export const MatSidenavContainerComponent = createComponent<IMatSidenavContainer
     };
 
     // TODO improve later
-    node.onConnected$(opened$)((opened: boolean): void => {
-      if (opened) {
-        queueMicrotask(() => {
-          querySelectorOrThrow<HTMLElement>(element, `:scope > .sidenav > .content`).focus();
-        });
-      }
+    node.onConnected((): IUnsubscribe => {
+      return opened$((opened: boolean): void => {
+        if (opened) {
+          queueMicrotask(() => {
+            querySelectorOrThrow<HTMLElement>(element, `:scope > .sidenav > .content`).focus();
+          });
+        }
+      });
     });
 
     return {

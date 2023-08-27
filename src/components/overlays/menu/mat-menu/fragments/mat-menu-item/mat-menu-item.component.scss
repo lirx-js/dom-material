@@ -1,0 +1,27 @@
+@use 'mat-menu-item.variables' as mat-menu-item;
+
+/** STYLE **/
+
+:host {
+  --mat-button-font-weight: normal;
+  --mat-button-padding-x: 14px;
+  --mat-button-padding-y: 12px;
+  --mat-button-border-radius: 0;
+
+  --mat-button-color: #{mat-menu-item.$mat-menu-item-color};
+  --mat-button-background-color: #{mat-menu-item.$mat-menu-item-background-color};
+  --mat-button-color--hover: #{mat-menu-item.$mat-menu-item-color--hover};
+  --mat-button-background-color--hover: #{mat-menu-item.$mat-menu-item-background-color--hover};
+  --mat-button-color--focused: #{mat-menu-item.$mat-menu-item-color--focused};
+  --mat-button-background-color--focused: #{mat-menu-item.$mat-menu-item-background-color--focused};
+
+  justify-content: start;
+  text-align: start;
+  // we must prevent any shrink or warp, else the size would change during the "size" computation,
+  // resulting in incorrect placement and scroll
+  width: 100%;
+  flex-shrink: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}

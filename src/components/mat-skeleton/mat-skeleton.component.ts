@@ -1,4 +1,4 @@
-import { compileStyleAsComponentStyle, createComponent } from '@lirx/dom';
+import { compileStyleAsComponentStyle, Component } from '@lirx/dom';
 
 // @ts-ignore
 import style from './mat-skeleton.component.scss?inline';
@@ -7,11 +7,9 @@ import style from './mat-skeleton.component.scss?inline';
  * COMPONENT: 'mat-skeleton'
  */
 
-interface IMatSkeletonComponentConfig {
-  element: HTMLElement;
-}
 
-export const MatSkeletonComponent = createComponent<IMatSkeletonComponentConfig>({
+
+export const MatSkeletonComponent = new Component<HTMLElement, object, object>({
   name: 'mat-skeleton',
   styles: [compileStyleAsComponentStyle(style)],
 });

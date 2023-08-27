@@ -1,0 +1,23 @@
+@use 'mat-dialog-body.variables' as mat-dialog-body;
+
+/** STYLE **/
+
+:host {
+  display: block;
+  padding: mat-dialog-body.$mat-dialog-body-padding-y mat-dialog-body.$mat-dialog-body-padding-x;
+  overflow: auto;
+
+  font-weight: mat-dialog-body.$mat-dialog-body-font-weight;
+  font-size: mat-dialog-body.$mat-dialog-body-font-size;
+  font-family: mat-dialog-body.$mat-dialog-body-font-family;
+  color: mat-dialog-body.$mat-dialog-body-color;
+}
+
+:host(:not(:first-child)) {
+  padding-top: 0;
+}
+
+:host(:not(:last-child)) {
+  padding-bottom: 0;
+}
+

@@ -9,25 +9,25 @@ $mat-badge-background-color: var(--mat-badge-background-color, mat-global.$mat-c
 @mixin mat-badge-position(
   $size
 ) {
-  &.mat-left {
+  &.mat--left {
     &::after {
       left: calc(#{$size} * -0.5);
     }
   }
 
-  &.mat-bottom {
+  &.mat--bottom {
     &::after {
       bottom: calc(#{$size} * -0.5);
     }
   }
 
-  &:not(.mat-left) {
+  &:not(.mat--left) {
     &::after {
       right: calc(#{$size} * -0.5);
     }
   }
 
-  &:not(.mat-bottom) {
+  &:not(.mat--bottom) {
     &::after {
       top: calc(#{$size} * -0.5);
     }

@@ -2,9 +2,11 @@ import { function$$ } from '@lirx/core';
 import {
   compileReactiveHTMLAsComponentTemplate,
   compileStyleAsComponentStyle,
-  createComponent,
   IClassNamesList,
-  VirtualCustomElementNode,
+  VirtualComponentNode,
+  Input,
+  Component,
+  input,
 } from '@lirx/dom';
 
 // @ts-ignore
@@ -25,27 +27,27 @@ export type IMatToolbarComponentPosition =
  * COMPONENT: 'mat-toolbar-container'
  */
 
-interface IMatToolbarContainerComponentConfig {
-  inputs: [
-    ['position', IMatToolbarComponentPosition],
-  ];
+export interface IMatToolbarContainerComponentData {
+  readonly position: Input<IMatToolbarComponentPosition>;
 }
 
-export const MatToolbarContainerComponent = createComponent<IMatToolbarContainerComponentConfig>({
+export const MatToolbarContainerComponent = new Component<HTMLElement, IMatToolbarContainerComponentData, object>({
   name: 'mat-toolbar-container',
   template: compileReactiveHTMLAsComponentTemplate({ html }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['position', 'top'],
-  ],
-  init: (node: VirtualCustomElementNode<IMatToolbarContainerComponentConfig>): void => {
-    const position$ = node.inputs.get$('position');
+  componentData: (): IMatToolbarContainerComponentData => {
+    return {
+      position: input<IMatToolbarComponentPosition>('top'),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatToolbarContainerComponentData>): void => {
+    const position$ = node.input$('position');
 
     const classList$ = function$$(
       [position$],
       (position): IClassNamesList => {
         return new Set([
-          `mat-position-${position}`,
+          `mat--position-${position}`,
         ]);
       },
     );

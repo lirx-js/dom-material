@@ -1,0 +1,47 @@
+@use 'mat-buttons-group.variables' as mat-buttons-group;
+
+:host {
+  display: inline-flex;
+  align-items: stretch;
+  justify-content: flex-start;
+
+  & > * {
+    --mat-button-border-color: #{mat-buttons-group.$mat-buttons-group-border-color};
+    --mat-button-border-color--hover: #{mat-buttons-group.$mat-buttons-group-border-color};
+    --mat-button-border-color--focused: #{mat-buttons-group.$mat-buttons-group-border-color};
+    --mat-button-border-color--disabled: #{mat-buttons-group.$mat-buttons-group-border-color};
+  }
+}
+
+:host(:not(.mat--column)) {
+  & > * {
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-left: 0;
+    }
+
+    &:not(:last-child) {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}
+
+
+:host(.mat--column) {
+  flex-direction: column;
+
+  & > * {
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      border-top: 0;
+    }
+
+    &:not(:last-child) {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
+}

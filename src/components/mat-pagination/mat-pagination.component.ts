@@ -2,8 +2,12 @@ import { IObservable, IObserver, map$$, ObservableProxy } from '@lirx/core';
 import {
   compileReactiveHTMLAsComponentTemplate,
   compileStyleAsComponentStyle,
-  createComponent,
-  VirtualCustomElementNode,
+  VirtualComponentNode,
+  Input,
+  Output,
+  Component,
+  input,
+  output,
 } from '@lirx/dom';
 import { IconChevronLeftComponent, IconChevronRightComponent, IconPageFirstComponent, IconPageLastComponent } from '@lirx/mdi';
 import { MatButtonModifier } from '../buttons/mat-button/mat-button.modifier';
@@ -18,6 +22,12 @@ import style from './mat-pagination.component.scss?inline';
 /**
  * COMPONENT: 'mat-pagination'
  **/
+
+export interface IMatPaginationComponentData {
+  readonly items: Input<readonly IMatPaginationItem[]>;
+  readonly disabled: Input<boolean>;
+  readonly selectedPageIndex: Output<number>;
+}
 
 interface IGetPageAriaLabelFunction {
   (
@@ -37,31 +47,19 @@ interface IGetMatPaginationItemButtonOnClickFunction {
   ): IObservable<IObserver<MouseEvent>>;
 }
 
-interface IData {
+interface ITemplateData {
   readonly items$: IObservable<readonly ObservableProxy<IMatPaginationItem>[]>;
   readonly getPageAriaLabel: IGetPageAriaLabelFunction;
   readonly getPageText: IGetPageTextFunction;
   readonly getMatPaginationItemButtonOnClick: IGetMatPaginationItemButtonOnClickFunction;
 }
 
-interface IMatPaginationComponentConfig {
-  element: HTMLElement;
-  inputs: [
-    ['items', readonly IMatPaginationItem[]],
-    ['disabled', boolean],
-  ];
-  outputs: [
-    ['selectedPageIndex', number],
-  ];
-  data: IData;
-}
-
-export const MatPaginationComponent = createComponent<IMatPaginationComponentConfig>({
+export const MatPaginationComponent = new Component<HTMLElement, IMatPaginationComponentData, ITemplateData>({
   name: 'mat-pagination',
   extends: 'nav',
   template: compileReactiveHTMLAsComponentTemplate({
     html,
-    customElements: [
+    components: [
       IconPageFirstComponent,
       IconChevronLeftComponent,
       IconChevronRightComponent,
@@ -73,31 +71,31 @@ export const MatPaginationComponent = createComponent<IMatPaginationComponentCon
     ],
   }),
   styles: [compileStyleAsComponentStyle(style)],
-  inputs: [
-    ['items'],
-    ['disabled', false],
-  ],
-  outputs: [
-    'selectedPageIndex',
-  ],
-  init: (node: VirtualCustomElementNode<IMatPaginationComponentConfig>): IData => {
+  componentData: (): IMatPaginationComponentData => {
+    return {
+      items: input<readonly IMatPaginationItem[]>(),
+      disabled: input<boolean>(false),
+      selectedPageIndex: output<number>(),
+    };
+  },
+  templateData: (node: VirtualComponentNode<HTMLElement, IMatPaginationComponentData>): ITemplateData => {
     node.setAttribute('aria-label', 'pagination navigation');
 
     /* ITEMS */
 
-    const items$ = node.inputs.get$('items');
+    const items$ = node.input$('items');
 
     const _items$ = new ObservableProxy(items$).array$();
 
     /* DISABLED */
 
-    const disabled$ = node.inputs.get$('disabled');
+    const disabled$ = node.input$('disabled');
 
     node.setReactiveClass('mat--disabled', disabled$);
 
     /* PAGE INDEX */
 
-    const $selectedPageIndex = node.outputs.$set('selectedPageIndex');
+    const $selectedPageIndex = node.$output('selectedPageIndex');
 
     /* MISC */
 

@@ -1,0 +1,6 @@
+@use '../../mat-dialog-content.variables' as mat-dialog-content;
+
+$mat-dialog-footer-padding-x: var(--mat-dialog-footer-padding-x, mat-dialog-content.$mat-dialog-content-padding-x);
+$mat-dialog-footer-padding-y: var(--mat-dialog-footer-padding-y, mat-dialog-content.$mat-dialog-content-padding-y);
+
+
