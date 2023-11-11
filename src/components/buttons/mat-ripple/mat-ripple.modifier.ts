@@ -39,7 +39,10 @@ export function matRippleModifierFunction(
   let stylePosition!: IStyleProperty;
 
   const onPointerDown = (event: PointerEvent): void => {
-    const isDisabled: boolean = node.getProperty('disabled' as any) ?? false;
+    const isDisabled: boolean = ((element as any).disabled ?? false)
+      || element.hasAttribute('disabled')
+      || element.classList.contains('mat--disabled')
+    ;
 
     if ((event.button === 0) && !isDisabled) {
       ripplesContainer.attach(node);

@@ -1,0 +1,40 @@
+@use 'mat-nav-list-item.variables' as mat-nav-list-item;
+
+/** STYLE **/
+
+:host {
+  --mat-button-font-size: #{mat-nav-list-item.$mat-nav-list-item-font-size};
+  --mat-button-font-weight: normal;
+  --mat-button-padding-x: 14px;
+  --mat-button-padding-y: 12px;
+  --mat-button-border-width: 0px;
+  --mat-button-border-radius: 0px;
+
+  --mat-button-color: #{mat-nav-list-item.$mat-nav-list-item-color};
+  --mat-button-background-color: #{mat-nav-list-item.$mat-nav-list-item-background-color};
+  --mat-button-color--hover: #{mat-nav-list-item.$mat-nav-list-item-color--hover};
+  --mat-button-background-color--hover: #{mat-nav-list-item.$mat-nav-list-item-background-color--hover};
+  --mat-button-color--focused: #{mat-nav-list-item.$mat-nav-list-item-color--focused};
+  --mat-button-background-color--focused: #{mat-nav-list-item.$mat-nav-list-item-background-color--focused};
+  --mat-button-color--disabled: #{mat-nav-list-item.$mat-nav-list-item-color--disabled};
+  --mat-button-background-color--disabled: #{mat-nav-list-item.$mat-nav-list-item-background-color--disabled};
+
+  justify-content: start;
+  text-align: start;
+  // we must prevent any shrink or warp, else the size would change during the "size" computation,
+  // resulting in incorrect placement and scroll
+  width: 100%;
+  flex-shrink: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+:host(:is(.mat--selected, [selected]):not(:disabled, .mat--disabled, [disabled])) {
+  --mat-button-color: #{mat-nav-list-item.$mat-nav-list-item-color--selected};
+  --mat-button-background-color: #{mat-nav-list-item.$mat-nav-list-item-background-color--selected};
+  --mat-button-color--hover: #{mat-nav-list-item.$mat-nav-list-item-color--selected--hover};
+  --mat-button-background-color--hover: #{mat-nav-list-item.$mat-nav-list-item-background-color--selected--hover};
+  --mat-button-color--focused: #{mat-nav-list-item.$mat-nav-list-item-color--selected--focused};
+  --mat-button-background-color--focused: #{mat-nav-list-item.$mat-nav-list-item-background-color--selected--focused};
+}

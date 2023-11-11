@@ -1,8 +1,8 @@
 import { IMatFloatingReference } from '../types/mat-floating-reference.type';
-import { IMatFloatingOptions } from '../types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from '../types/options/mat-floating-compute-position-config.type';
 import { VirtualComponentNode, Input } from '@lirx/dom';
 import { IVoidTransitionFunction } from '@lirx/animations';
-import { ComputePositionConfig, computePosition } from '@floating-ui/dom';
+import { ComputePositionConfig, computePosition, FloatingElement } from '@floating-ui/dom';
 import { getMatFloatingAnimationTransition } from './get-mat-floating-animation-transition';
 import {
   getVirtualComponentNodeInputAfterMicroDelay,
@@ -10,7 +10,7 @@ import {
 
 export interface IMatFloatingAnimationTransitionData {
   readonly reference: Input<IMatFloatingReference>;
-  readonly options: Input<IMatFloatingOptions | undefined>;
+  readonly computePositionConfig: Input<IMatFloatingComputePositionConfig | undefined>;
 }
 
 export function getMatFloatingAnimationTransitionFromVirtualComponentNode(
@@ -19,20 +19,20 @@ export function getMatFloatingAnimationTransitionFromVirtualComponentNode(
 ): Promise<IVoidTransitionFunction> {
   return Promise.all([
     getVirtualComponentNodeInputAfterMicroDelay(node, 'reference', { signal }),
-    getVirtualComponentNodeInputAfterMicroDelay(node, 'options', { signal }),
+    getVirtualComponentNodeInputAfterMicroDelay(node, 'computePositionConfig', { signal }),
   ])
     .then((
       [
         reference,
-        options,
+        computePositionConfig,
       ]:
         [
           IMatFloatingReference,
-            IMatFloatingOptions | undefined,
+            IMatFloatingComputePositionConfig | undefined,
         ],
     ): Promise<ComputePositionConfig> => {
-      // TODO improve by selecting the right element
-      return computePosition(reference, document.createElement('div'), options);
+      const floating: FloatingElement = node.elementNode.querySelector('mat-floating-content') ?? document.createElement('div');
+      return computePosition(reference, floating, computePositionConfig);
     })
     .then(({ placement }: ComputePositionConfig): IVoidTransitionFunction => {
       return getMatFloatingAnimationTransition({

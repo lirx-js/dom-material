@@ -1,0 +1,19 @@
+@use '../../../../../styles/themes/mat-global.theme.dark' as mat-global;
+
+@mixin mat-nav-list-item-theme--dark {
+  --mat-nav-list-item-color: #ddd;
+  --mat-nav-list-item-background-color: #424242;
+  --mat-nav-list-item-color--hover: #fff;
+  --mat-nav-list-item-background-color--hover: #555;
+  --mat-nav-list-item-color--focused: #fff;
+  --mat-nav-list-item-background-color--focused: #666;
+  --mat-nav-list-item-color--disabled: rgb(255 255 255 / 0.3);
+  --mat-nav-list-item-background-color--disabled: #424242;
+
+  --mat-nav-list-item-color--selected: #{lighten(mat-global.$mat-color-primary--theme--dark, 20%)};
+  --mat-nav-list-item-background-color--selected: #{mix(mat-global.$mat-color-primary--theme--dark, #424242, 15%)};
+  --mat-nav-list-item-color--selected--hover: #{lighten(mat-global.$mat-color-primary--theme--dark, 25%)};
+  --mat-nav-list-item-background-color--selected--hover: #{mix(mat-global.$mat-color-primary--theme--dark, #424242, 25%)};
+  --mat-nav-list-item-color--selected--focused: #{lighten(mat-global.$mat-color-primary--theme--dark, 30%)};
+  --mat-nav-list-item-background-color--selected--focused: #{mix(mat-global.$mat-color-primary--theme--dark, #424242, 30%)};
+}

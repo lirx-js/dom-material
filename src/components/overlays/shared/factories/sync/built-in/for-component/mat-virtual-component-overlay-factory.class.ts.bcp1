@@ -1,0 +1,42 @@
+import { VirtualComponentNode, AbstractComponent, IGenericAbstractComponent } from '@lirx/dom';
+import { MatOverlayFactory } from '../../mat-overlay-factory.class';
+import {
+  MatVirtualComponentOverlay,
+  IMatVirtualComponentOverlayOptions,
+} from '../../../../instance/for-component/mat-virtual-component-overlay.class';
+
+/** TYPES **/
+
+export interface IMatVirtualComponentOverlayFactoryOptions<GElement extends Element, GData extends object> extends Omit<IMatVirtualComponentOverlayOptions<GElement, GData>, 'component' | 'slots'> {
+
+}
+
+export interface IMatVirtualComponentOverlayFactoryOpenOptions<GElement extends Element, GData extends object> extends Pick<IMatVirtualComponentOverlayOptions<GElement, GData>, 'slots'> {
+
+}
+
+/** CLASS **/
+GComponent extends IGenericAbstractComponent
+export class MatVirtualComponentOverlayFactory<GElement extends Element, GData extends object> extends MatOverlayFactory<VirtualComponentNode<GElement, GData>> {
+  readonly #component: AbstractComponent<GElement, GData>;
+  readonly #options: IMatVirtualComponentOverlayFactoryOptions<GElement, GData> | undefined;
+
+  constructor(
+    component: AbstractComponent<GElement, GData>,
+    options?: IMatVirtualComponentOverlayFactoryOptions<GElement, GData>,
+  ) {
+    super();
+    this.#component = component;
+    this.#options = options;
+  }
+
+  override open(
+    options?: IMatVirtualComponentOverlayFactoryOpenOptions<GElement, GData>,
+  ): MatVirtualComponentOverlay<GElement, GData> {
+    return new MatVirtualComponentOverlay<GElement, GData>({
+      ...this.#options,
+      ...options,
+      component: this.#component,
+    });
+  }
+}

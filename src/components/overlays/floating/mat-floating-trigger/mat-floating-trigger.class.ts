@@ -8,28 +8,37 @@ import {
   switchMap$$,
   readObservableValue,
   UNABLE_TO_READ_OBSERVABLE,
-  isMouseOverElementObservable,
+  isMouseOverElementObservable, timeout, distinct$$,
 } from '@lirx/core';
-import { openMatFloating } from '../mat-floating/factory/open-mat-floating';
-import { IMatFloatingOptions } from '../mat-floating/types/options/mat-floating-options.type';
+import { MatFloating } from '../mat-floating/factory/mat-floating.class';
+import { IMatFloatingComputePositionConfig } from '../mat-floating/types/options/mat-floating-compute-position-config.type';
 import { IUnsubscribe } from '@lirx/unsubscribe';
 import { createMatFloatingReferenceFromVirtualElementNode } from '../functions/create-mat-floating-reference-from-virtual-element.node';
 import { MatOverlay } from '../../shared/instance/mat-overlay.class';
 import { IMatOverlayState } from '../../shared/instance/types/mat-overlay-state.type';
 
+/** TYPES **/
+
 export type IMatFloatingTriggerTemplate = IVirtualComponentNodeSlotTemplate<{ overlay: MatOverlay<IMatFloatingVirtualComponentNode>; }>;
 
 export interface IMatFloatingTriggerOptions {
-  reference: IGenericVirtualReactiveElementNode;
-  content: IMatFloatingTriggerTemplate;
-  floatingOptions: IMatFloatingOptions;
-  cssVariables?: IStylePropertiesMapAsRecord;
+  readonly reference: IGenericVirtualReactiveElementNode;
+  readonly content: IMatFloatingTriggerTemplate;
+  readonly computePositionConfig: IMatFloatingComputePositionConfig;
+  readonly cssVariables?: IStylePropertiesMapAsRecord;
 }
+
+export interface IMatFloatingTriggerOpenOnMouseOverOptions {
+  readonly displayDelay?: number;
+  readonly hideDelay?: number;
+}
+
+/** CLASS **/
 
 export class MatFloatingTrigger {
   readonly #reference: IGenericVirtualReactiveElementNode;
   readonly #content: IMatFloatingTriggerTemplate;
-  readonly #floatingOptions: IMatFloatingOptions;
+  readonly #computePositionConfig: IMatFloatingComputePositionConfig;
   readonly #cssVariables: IStylePropertiesMapAsRecord | undefined;
 
   #overlay: MatOverlay<IMatFloatingVirtualComponentNode> | undefined;
@@ -43,13 +52,13 @@ export class MatFloatingTrigger {
     {
       reference,
       content,
-      floatingOptions,
+      computePositionConfig,
       cssVariables,
     }: IMatFloatingTriggerOptions,
   ) {
     this.#reference = reference;
     this.#content = content;
-    this.#floatingOptions = floatingOptions;
+    this.#computePositionConfig = computePositionConfig;
     this.#cssVariables = cssVariables;
 
     this.#overlay = void 0;
@@ -87,9 +96,24 @@ export class MatFloatingTrigger {
     }
   }
 
-  openOnMouseOver(): void {
+  openOnMouseOver(
+    {
+      displayDelay = 0,
+      hideDelay = 0,
+    }: IMatFloatingTriggerOpenOnMouseOverOptions = {},
+  ): void {
     if (this.#stopOpenOnMouseOver === void 0) {
-      const mouseOver$ = isMouseOverElementObservable(this.#reference.elementNode);
+      const mouseOver$ = distinct$$(
+        switchMap$$(isMouseOverElementObservable(this.#reference.elementNode), (mouseOver: boolean): IObservable<boolean> => {
+          return timeout(
+            mouseOver
+              ? displayDelay
+              : hideDelay,
+            () => mouseOver,
+          );
+        }),
+      );
+
       this.#stopOpenOnMouseOver = this.#reference.onConnected((): IUnsubscribe => {
         return mouseOver$((mouseOver: boolean): void => {
           if (mouseOver) {
@@ -112,11 +136,10 @@ export class MatFloatingTrigger {
 
   open(): MatOverlay<IMatFloatingVirtualComponentNode> {
     if (this.#overlay === void 0) {
-      const instance = openMatFloating({
+      const instance = MatFloating.open({
         reference: createMatFloatingReferenceFromVirtualElementNode(this.#reference),
-        options: this.#floatingOptions,
+        computePositionConfig: this.#computePositionConfig,
         cssVariables: this.#cssVariables,
-      }, {
         slots: new Map([
           ['*', this.#content],
         ]),

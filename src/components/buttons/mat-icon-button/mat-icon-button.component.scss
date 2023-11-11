@@ -1,15 +1,22 @@
 @use 'mat-icon-button.variables' as mat-icon-button;
+@use '../mat-button/mat-button.variables' as mat-button;
 
 /** STYLE **/
 
 :host {
-  gap: mat-icon-button.$mat-icon-button-padding;
-  padding: mat-icon-button.$mat-icon-button-padding;
+  $-padding: mat-icon-button.$mat-icon-button-padding;
+  $-border-radius: calc(#{mat-button.$mat-button-border-width} + #{$-padding} + (#{mat-icon-button.$mat-icon-button-icon-size} * 0.5));
 
-  border-width: 0;
-  border-radius: calc(#{mat-icon-button.$mat-icon-button-padding} + (#{mat-icon-button.$mat-icon-button-icon-size} * 0.5));
+  padding: #{$-padding} !important;
+  gap: #{$-padding} !important;
+  border-radius: $-border-radius !important;
+  font-size: 0 !important;
 
-  font-size: 0;
+  //--mat-button-padding-x: #{$-padding};
+  //--mat-button-padding-y: #{$-padding};
+  //--mat-button-gap: #{$-padding};
+  //--mat-button-border-radius: #{$-border-radius};
+  //--mat-button-font-size: 0px;
 
   --mat-button-icon-size: #{mat-icon-button.$mat-icon-button-icon-size};
 }

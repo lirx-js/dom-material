@@ -13,7 +13,7 @@
   gap: mat-button.$mat-button-gap;
   padding: mat-button.$mat-button-padding-y mat-button.$mat-button-padding-x;
 
-  border-width: 1px;
+  border-width: mat-button.$mat-button-border-width;
   border-style: solid;
   border-radius: mat-button.$mat-button-border-radius;
 

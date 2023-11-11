@@ -9,7 +9,7 @@ import {
 } from '../../../shared/instance/animation/create-mat-overlay-open-close-options-from-reversible-transition-factory';
 
 export interface ICreateMatOverlayOpenCloseOptionsForMatFloatingOptions {
-  animationDuration?: number;
+  readonly animationDuration?: number;
 }
 
 export function createMatOverlayOpenCloseOptionsForMatFloating<GElement extends Element, GData extends IMatFloatingAnimationTransitionData>(

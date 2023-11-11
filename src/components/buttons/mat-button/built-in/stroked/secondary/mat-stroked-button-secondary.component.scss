@@ -1,0 +1,11 @@
+@use '../../../../../../styles/mat-global.variables' as mat-global;
+@use '../create-mat-stroked-button.mixin' as create-mat-stroked-button-mixin;
+
+/** STYLE **/
+
+:host {
+  @include create-mat-stroked-button-mixin.create-mat-stroked-button(
+          mat-global.$mat-color-secondary,
+          mat-global.$mat-color-secondary-raw,
+  );
+}

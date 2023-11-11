@@ -1,13 +1,13 @@
-@use 'mat-tooltip.variables' as mat-tooltip-content;
+@use 'mat-tooltip.variables' as mat-tooltip;
 @use 'sass:math' as math;
 
 /** STYLE **/
 
-$-absolute-min-size: calc(#{mat-tooltip-content.$mat-tooltip-arrow-size} * #{math.sqrt(2)} + 8px /* border-radius */
+$-absolute-min-size: calc(#{mat-tooltip.$mat-tooltip-arrow-size} * #{math.sqrt(2)} + 8px /* border-radius */
 );
-$-min-size: max(calc((#{mat-tooltip-content.$mat-tooltip-arrow-offset-cross-axis} * 2)), #{$-absolute-min-size});
-$-arrow-offset: calc((#{mat-tooltip-content.$mat-tooltip-arrow-size} * -0.5));
-$-arrow-offset-cross-axis: calc(#{mat-tooltip-content.$mat-tooltip-arrow-offset-cross-axis} + #{$-arrow-offset});
+$-min-size: max(calc((#{mat-tooltip.$mat-tooltip-arrow-offset-cross-axis} * 2)), #{$-absolute-min-size});
+$-arrow-offset: calc((#{mat-tooltip.$mat-tooltip-arrow-size} * -0.5));
+$-arrow-offset-cross-axis: calc(#{mat-tooltip.$mat-tooltip-arrow-offset-cross-axis} + #{$-arrow-offset});
 $-arrow-offset-main-axis: $-arrow-offset;
 
 $-initial-arrow-rotation: -45deg;
@@ -21,8 +21,8 @@ $-mat-floating-content-selector: 'mat-floating-content';
   text-align: center;
   padding: 4px 6px;
 
-  background-color: mat-tooltip-content.$mat-tooltip-background-color;
-  box-shadow: 0 0 #{mat-tooltip-content.$mat-tooltip-shadow-size} #{mat-tooltip-content.$mat-tooltip-shadow-color};
+  background-color: mat-tooltip.$mat-tooltip-background-color;
+  box-shadow: 0 0 #{mat-tooltip.$mat-tooltip-shadow-size} #{mat-tooltip.$mat-tooltip-shadow-color};
   border-radius: 4px;
 
   min-width: $-absolute-min-size;
@@ -34,22 +34,23 @@ $-mat-floating-content-selector: 'mat-floating-content';
 
   font-size: 16px;
   line-height: 20px;
-  color: mat-tooltip-content.$mat-tooltip-color;
+  color: mat-tooltip.$mat-tooltip-color;
 
+  // TODO improve from angular elements
 
   &::before {
     content: '';
     position: absolute;
-    width: mat-tooltip-content.$mat-tooltip-arrow-size;
-    height: mat-tooltip-content.$mat-tooltip-arrow-size;
+    width: mat-tooltip.$mat-tooltip-arrow-size;
+    height: mat-tooltip.$mat-tooltip-arrow-size;
     transform-origin: center center;
     rotate: $-initial-arrow-rotation;
-    background-color: mat-tooltip-content.$mat-tooltip-background-color;
-    box-shadow: 0 0 #{mat-tooltip-content.$mat-tooltip-shadow-size} #{mat-tooltip-content.$mat-tooltip-shadow-color};
+    background-color: mat-tooltip.$mat-tooltip-background-color;
+    box-shadow: 0 0 #{mat-tooltip.$mat-tooltip-shadow-size} #{mat-tooltip.$mat-tooltip-shadow-color};
     clip-path: polygon(
-            calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1) calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1),
-            calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size}) calc(#{mat-tooltip-content.$mat-tooltip-shadow-size} * -1),
-            calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size}) calc(100% + #{mat-tooltip-content.$mat-tooltip-shadow-size})
+            calc(#{mat-tooltip.$mat-tooltip-shadow-size} * -1) calc(#{mat-tooltip.$mat-tooltip-shadow-size} * -1),
+            calc(100% + #{mat-tooltip.$mat-tooltip-shadow-size}) calc(#{mat-tooltip.$mat-tooltip-shadow-size} * -1),
+            calc(100% + #{mat-tooltip.$mat-tooltip-shadow-size}) calc(100% + #{mat-tooltip.$mat-tooltip-shadow-size})
     );
   }
 }

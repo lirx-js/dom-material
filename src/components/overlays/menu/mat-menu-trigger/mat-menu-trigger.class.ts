@@ -1,10 +1,10 @@
-import { IMatFloatingOptions } from '../../floating/mat-floating/types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from '../../floating/mat-floating/types/options/mat-floating-compute-position-config.type';
 import { IMatFloatingTriggerOptions, MatFloatingTrigger } from '../../floating/mat-floating-trigger/mat-floating-trigger.class';
 import { createMatFloatingOptions, ICreateMatFloatingOptions } from '../../floating/functions/create-mat-floating-options';
 
 /** CLASS **/
 
-export interface IMatMenuTriggerOptions extends Omit<IMatFloatingTriggerOptions, 'floatingOptions'>, ICreateMatMenuOptions {
+export interface IMatMenuTriggerOptions extends Omit<IMatFloatingTriggerOptions, 'computePositionConfig'>, ICreateMatMenuOptions {
 }
 
 export class MatMenuTrigger extends MatFloatingTrigger {
@@ -17,7 +17,7 @@ export class MatMenuTrigger extends MatFloatingTrigger {
         '--mat-floating-container-backdrop-color': 'transparent',
         ...options.cssVariables,
       },
-      floatingOptions: createMatMenuOptions(options),
+      computePositionConfig: createMatMenuOptions(options),
     });
   }
 }
@@ -29,7 +29,7 @@ export interface ICreateMatMenuOptions extends ICreateMatFloatingOptions {
 
 export function createMatMenuOptions(
   options?: ICreateMatMenuOptions,
-): IMatFloatingOptions {
+): IMatFloatingComputePositionConfig {
   return createMatFloatingOptions({
     placement: 'bottom-start',
     defaultPlacements: ['bottom-start', 'top-start'],

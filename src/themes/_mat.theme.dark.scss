@@ -1,0 +1,48 @@
+// global
+@use '../styles/themes/mat-global.theme.dark' as mat-global;
+// others
+@use '../components/loaders/mat-dual-ring-loader/themes/mat-dual-ring.theme.dark' as mat-dual-ring;
+@use '../components/mat-nav-list/fragments/mat-nav-list-item/themes/mat-nav-list-item.theme.dark' as mat-nav-list-item;
+@use '../components/mat-scrollbar/themes/mat-scrollbar.theme.dark' as mat-scrollbar;
+@use '../components/mat-sidenav-container/themes/mat-sidenav-container.theme.dark' as mat-sidenav-container;
+@use '../components/mat-skeleton/themes/mat-skeleton-container.theme.dark' as mat-skeleton-container;
+// toolbar
+@use '../components/mat-toolbar-container/themes/mat-toolbar-container.theme.dark' as mat-toolbar-container;
+@use '../components/mat-toolbar-container/fragments/toolbar/themes/mat-toolbar.theme.dark' as mat-toolbar;
+// dialog
+@use '../components/overlays/dialog/fragments/mat-dialog-container/themes/mat-dialog-container.theme.dark' as mat-dialog-container;
+@use '../components/overlays/dialog/fragments/mat-dialog-container/fragments/mat-dialog-content/themes/mat-dialog-content.theme.dark' as mat-dialog-content;
+@use '../components/overlays/dialog/fragments/mat-dialog-container/fragments/mat-dialog-content/fragments/mat-dialog-header/fragments/mat-dialog-close/themes/mat-dialog-close.theme.dark' as mat-dialog-close;
+@use '../components/overlays/dialog/fragments/mat-dialog-container/fragments/mat-dialog-content/fragments/mat-dialog-header/fragments/mat-dialog-title/themes/mat-dialog-title.theme.dark' as mat-dialog-title;
+@use '../components/overlays/dialog/fragments/mat-dialog-container/fragments/mat-dialog-content/fragments/mat-dialog-body/themes/mat-dialog-body.theme.dark' as mat-dialog-body;
+// menu
+@use '../components/overlays/menu/mat-menu/themes/mat-menu.theme.dark' as mat-menu;
+@use '../components/overlays/menu/mat-menu/fragments/mat-menu-item/themes/mat-menu-item.theme.dark' as mat-menu-item;
+// others
+@use '../components/overlays/tooltip/mat-tooltip/themes/mat-tooltip.theme.dark' as mat-tooltip;
+
+
+@mixin mat-theme--dark {
+  // global
+  @include mat-global.mat-global-theme--dark;
+  // others
+  @include mat-dual-ring.mat-dual-ring-theme--dark;
+  @include mat-nav-list-item.mat-nav-list-item-theme--dark;
+  @include mat-scrollbar.mat-scrollbar-theme--dark;
+  @include mat-sidenav-container.mat-sidenav-container-theme--dark;
+  @include mat-skeleton-container.mat-skeleton-theme--dark;
+  // toolbar
+  @include mat-toolbar-container.mat-toolbar-container-theme--dark;
+  @include mat-toolbar.mat-toolbar-theme--dark;
+  // dialog
+  @include mat-dialog-container.mat-dialog-container-theme--dark;
+  @include mat-dialog-content.mat-dialog-content-theme--dark;
+  @include mat-dialog-close.mat-dialog-close-theme--dark;
+  @include mat-dialog-title.mat-dialog-title-theme--dark;
+  @include mat-dialog-body.mat-dialog-body-theme--dark;
+  // menu
+  @include mat-menu.mat-menu-theme--dark;
+  @include mat-menu-item.mat-menu-item-theme--dark;
+  // others
+  @include mat-tooltip.mat-tooltip-theme--dark;
+}

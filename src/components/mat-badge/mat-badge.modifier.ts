@@ -25,8 +25,8 @@ export function matBadgeContentToString(
 }
 
 export interface IMatBadgeOptions {
-  content: IMatBadgeContent;
-  // dot?: boolean;
+  readonly content: IMatBadgeContent;
+  // readonly dot?: boolean;
 }
 
 export type IMatBadgeParam =

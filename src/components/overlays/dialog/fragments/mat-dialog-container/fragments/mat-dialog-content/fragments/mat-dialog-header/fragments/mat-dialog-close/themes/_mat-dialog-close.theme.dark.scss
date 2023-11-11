@@ -1,0 +1,5 @@
+
+@mixin mat-dialog-close-theme--dark {
+  --mat-dialog-close-color: rgb(255 255 255 / 0.8);
+  --mat-dialog-close-color--hover: rgb(255 255 255 / 0.9);
+}

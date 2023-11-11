@@ -6,6 +6,7 @@
   display: block;
   margin: mat-dialog-close.$mat-dialog-close-offset mat-dialog-close.$mat-dialog-close-offset mat-dialog-close.$mat-dialog-close-offset auto;
 
-  --mat-icon-button-color-hover: #{mat-dialog-close.$mat-dialog-close-color-hover};
-  --mat-icon-button-background-color-hover: transparent;
+  --mat-button-color: #{mat-dialog-close.$mat-dialog-close-color};
+  --mat-button-color--hover: #{mat-dialog-close.$mat-dialog-close-color--hover};
+  --mat-button-background-color--hover: transparent;
 }

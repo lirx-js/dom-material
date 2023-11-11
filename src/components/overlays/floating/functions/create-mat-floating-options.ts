@@ -1,22 +1,22 @@
 import { offset, OffsetOptions } from '@floating-ui/core';
-import { IMatFloatingOptions } from '../mat-floating/types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from '../mat-floating/types/options/mat-floating-compute-position-config.type';
 import { size, MiddlewareState, flip, shift } from '@floating-ui/dom';
 import { IMatFloatingPlacementList } from '../mat-floating/types/options/mat-floating-placement';
 import { matFloatingPlacementLikeToMatFloatingPlacementList, IMatFloatingPlacementLike } from './mat-floating-placement-like';
 import { setMatFloatingMaxSize } from './set-mat-floating-max-size';
 
 export interface ICreateMatFloatingOptions {
-  placement?: IMatFloatingPlacementLike;
-  defaultPlacements?: IMatFloatingPlacementList;
-  offset?: OffsetOptions;
-  maxWidth?: number;
-  maxHeight?: number;
-  marginWithContainer?: number;
+  readonly placement?: IMatFloatingPlacementLike;
+  readonly defaultPlacements?: IMatFloatingPlacementList;
+  readonly offset?: OffsetOptions;
+  readonly maxWidth?: number;
+  readonly maxHeight?: number;
+  readonly marginWithContainer?: number;
 }
 
 export interface ISizeMiddleWareSizeApplyArgument extends MiddlewareState {
-  availableWidth: number;
-  availableHeight: number;
+  readonly availableWidth: number;
+  readonly availableHeight: number;
 }
 
 export function createMatFloatingOptions(
@@ -28,7 +28,7 @@ export function createMatFloatingOptions(
     maxHeight = Number.POSITIVE_INFINITY,
     marginWithContainer = 10,
   }: ICreateMatFloatingOptions = {},
-): IMatFloatingOptions {
+): IMatFloatingComputePositionConfig {
   const placements: IMatFloatingPlacementList = matFloatingPlacementLikeToMatFloatingPlacementList(placement, defaultPlacements);
 
   return {

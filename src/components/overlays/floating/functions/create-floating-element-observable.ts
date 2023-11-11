@@ -1,10 +1,10 @@
 import { computePosition, ComputePositionReturn, FloatingElement, ReferenceElement } from '@floating-ui/dom';
 import { IObservable, IObserver, IUnsubscribeOfObservable } from '@lirx/core';
-import { IMatFloatingOptions } from '../mat-floating/types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from '../mat-floating/types/options/mat-floating-compute-position-config.type';
 
 export interface IFloatingElementPosition extends ComputePositionReturn {
-  reference: ReferenceElement;
-  floating: FloatingElement;
+  readonly reference: ReferenceElement;
+  readonly floating: FloatingElement;
 }
 
 export function createFloatingElementObservable(
@@ -13,7 +13,7 @@ export function createFloatingElementObservable(
   {
     updateInterval = 100,
     ...options
-  }: IMatFloatingOptions = {},
+  }: IMatFloatingComputePositionConfig = {},
 ): IObservable<IFloatingElementPosition> {
   return (emit: IObserver<IFloatingElementPosition>): IUnsubscribeOfObservable => {
     let running: boolean = true;

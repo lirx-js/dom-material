@@ -1,10 +1,11 @@
 import { Input, input, VirtualComponentNode } from '@lirx/dom';
-import { IVirtualComponentMatOverlayInput } from '../types/virtual-component-mat-overlay.type';
+import { MatOverlay } from '../../mat-overlay.class';
 
-const MAT_OVERLAY_INPUT_NAME = Symbol('matOverlay');
+// const MAT_OVERLAY_INPUT_NAME = Symbol('matOverlay');
+const MAT_OVERLAY_INPUT_NAME = 'MAT_OVERLAY';
 export type IMatOverlayInputName = typeof MAT_OVERLAY_INPUT_NAME;
 
-export type IMatOverlayInputValue<GElement extends Element, GData extends object> = IVirtualComponentMatOverlayInput<GElement, GData>;
+export type IMatOverlayInputValue<GElement extends Element, GData extends object> = MatOverlay<VirtualComponentNode<GElement, GData>>;
 
 export type IMatOverlayInput<GElement extends Element, GData extends object> = Input<IMatOverlayInputValue<GElement, GData>>;
 

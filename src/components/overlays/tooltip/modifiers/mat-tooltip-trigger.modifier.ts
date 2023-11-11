@@ -6,9 +6,15 @@ import {
   ICreateMatFloatingTriggerFactoryOptions,
   IMatMatFloatingTriggerBaseOptions,
 } from '../../floating/mat-floating-trigger/create-mat-floating-trigger-modifier-function';
+import { IMatFloatingTriggerOpenOnMouseOverOptions } from '../../floating/mat-floating-trigger/mat-floating-trigger.class';
 
-export interface IMatTooltipTriggerModifierOptions extends Omit<IMatTooltipTriggerOptions, 'reference'>, IMatMatFloatingTriggerBaseOptions<MatTooltipTrigger> {
-  matTooltipTrigger?: IObserver<MatTooltipTrigger>;
+export interface IMatTooltipTriggerModifierOptions extends //
+  Omit<IMatTooltipTriggerOptions, 'reference'>,
+  IMatMatFloatingTriggerBaseOptions<MatTooltipTrigger>,
+  IMatFloatingTriggerOpenOnMouseOverOptions
+//
+{
+  readonly matTooltipTrigger?: IObserver<MatTooltipTrigger>;
 }
 
 export const matTooltipTriggerModifierFunction = createMatFloatingTriggerModifierFunction<MatTooltipTrigger, IMatTooltipTriggerModifierOptions>(
@@ -16,12 +22,17 @@ export const matTooltipTriggerModifierFunction = createMatFloatingTriggerModifie
   (
     {
       matTooltipTrigger: $matTooltipTrigger,
+      displayDelay = 0,
+      hideDelay = 0,
       ...options
     }: ICreateMatFloatingTriggerFactoryOptions<IMatTooltipTriggerModifierOptions>,
   ): MatTooltipTrigger => {
     const matTooltipTrigger = new MatTooltipTrigger(options);
 
-    matTooltipTrigger.openOnMouseOver();
+    matTooltipTrigger.openOnMouseOver({
+      displayDelay,
+      hideDelay,
+    });
 
     return matTooltipTrigger;
   },

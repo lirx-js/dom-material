@@ -1,0 +1,27 @@
+@use '../../../../styles/mat-global.variables' as mat-global;
+
+$mat-nav-list-item-font-size: var(--mat-nav-list-item-font-size, 16px);
+
+$mat-nav-list-item-color: var(--mat-nav-list-item-color, #333);
+$mat-nav-list-item-background-color: var(--mat-nav-list-item-background-color, #fff);
+
+$mat-nav-list-item-color--hover: var(--mat-nav-list-item-color--hover, $mat-nav-list-item-color);
+$mat-nav-list-item-background-color--hover: var(--mat-nav-list-item-background-color--hover, #eee);
+
+$mat-nav-list-item-color--focused: var(--mat-nav-list-item-color--focused, $mat-nav-list-item-color);
+$mat-nav-list-item-background-color--focused: var(--mat-nav-list-item-background-color--focused, #ddd);
+
+$mat-nav-list-item-color--disabled: var(--mat-nav-list-item-color--disabled, rgb(0 0 0 / 0.26));
+$mat-nav-list-item-background-color--disabled: var(--mat-nav-list-item-background-color--disabled, #fff);
+
+// selected
+$mat-nav-list-item-color--selected: var(--mat-nav-list-item-color--selected, mat-global.$mat-color-primary);
+$mat-nav-list-item-background-color--selected: var(--mat-nav-list-item-background-color--selected, lighten(mat-global.$mat-color-primary-raw, 40%));
+
+$mat-nav-list-item-color--selected--hover: var(--mat-nav-list-item-color--selected--hover, mat-global.$mat-color-primary);
+$mat-nav-list-item-background-color--selected--hover: var(--mat-nav-list-item-background-color--selected--hover, lighten(mat-global.$mat-color-primary-raw, 35%));
+
+$mat-nav-list-item-color--selected--focused: var(--mat-nav-list-item-color--selected--focused, mat-global.$mat-color-primary);
+$mat-nav-list-item-background-color--selected--focused: var(--mat-nav-list-item-background-color--selected--focused, lighten(mat-global.$mat-color-primary-raw, 30%));
+
+

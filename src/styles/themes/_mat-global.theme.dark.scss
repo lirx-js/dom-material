@@ -1,0 +1,9 @@
+$mat-color-primary--theme--dark: #9c27b0;
+$mat-color-secondary--theme--dark: #69f0ae;
+
+@mixin mat-global-theme--dark {
+  //--mat-color-primary: #3f51b5;
+  //--mat-color-secondary: #ff4081;
+  --mat-color-primary: #{$mat-color-primary--theme--dark};
+  --mat-color-secondary: #{$mat-color-secondary--theme--dark};
+}

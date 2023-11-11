@@ -13,8 +13,8 @@ export interface ICreateMatOverlayOpenCloseOptionsFromReversibleTransitionFactor
 }
 
 export interface ICreateMatOverlayFactoryOptionsFromReversibleTransitionFactoryOptions<GNode extends VirtualNode> {
-  transitionFactory: ICreateMatOverlayOpenCloseOptionsFromReversibleTransitionFactoryFactory<GNode>;
-  duration: number;
+  readonly transitionFactory: ICreateMatOverlayOpenCloseOptionsFromReversibleTransitionFactoryFactory<GNode>;
+  readonly duration: number;
 }
 
 export function createMatOverlayOpenCloseOptionsFromReversibleTransitionFactory<GNode extends VirtualNode>(

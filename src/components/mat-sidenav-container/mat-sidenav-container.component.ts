@@ -74,7 +74,7 @@ export const MatSidenavContainerComponent = new Component<HTMLElement, IMatSiden
   templateData: (node: VirtualComponentNode<HTMLElement, IMatSidenavContainerComponentData>): ITemplateData => {
     const element: HTMLElement = node.elementNode;
 
-    const enableUserClose = () => node.input$('enableUserClose');
+    const enableUserClose = () => node.inputValue('enableUserClose');
     const mode$ = node.input$('mode');
     const position$ = node.input$('position');
     const hasBackdrop$ = node.input$('hasBackdrop');

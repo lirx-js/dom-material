@@ -2,10 +2,10 @@ import { IMatFloatingPlacement } from '../mat-floating/types/options/mat-floatin
 import { roundByDPR } from '../../../../functions/round-by-dpr';
 
 export interface ISetMatFloatingPositionOptions {
-  element: HTMLElement;
-  x: number;
-  y: number;
-  placement: IMatFloatingPlacement;
+  readonly element: HTMLElement;
+  readonly x: number;
+  readonly y: number;
+  readonly placement: IMatFloatingPlacement;
 }
 
 export function setMatFloatingPosition(

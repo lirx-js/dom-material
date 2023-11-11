@@ -9,8 +9,8 @@ import { querySelectorOrThrow } from '@lirx/dom';
 import { IMatFloatingPlacement } from '../types/options/mat-floating-placement';
 
 export interface IGetMatFloatingAnimationTransitionOptions {
-  element: HTMLElement;
-  placement?: IMatFloatingPlacement | undefined;
+  readonly element: HTMLElement;
+  readonly placement?: IMatFloatingPlacement | undefined;
 }
 
 export function getMatFloatingAnimationTransition(

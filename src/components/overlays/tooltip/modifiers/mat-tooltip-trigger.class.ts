@@ -1,10 +1,10 @@
-import { IMatFloatingOptions } from '../../floating/mat-floating/types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from '../../floating/mat-floating/types/options/mat-floating-compute-position-config.type';
 import { IMatFloatingTriggerOptions, MatFloatingTrigger } from '../../floating/mat-floating-trigger/mat-floating-trigger.class';
 import { ICreateMatFloatingOptions, createMatFloatingOptions } from '../../floating/functions/create-mat-floating-options';
 
 /** CLASS **/
 
-export interface IMatTooltipTriggerOptions extends Omit<IMatFloatingTriggerOptions, 'floatingOptions'>, ICreateMatTooltipOptions {
+export interface IMatTooltipTriggerOptions extends Omit<IMatFloatingTriggerOptions, 'computePositionConfig'>, ICreateMatTooltipOptions {
 }
 
 export class MatTooltipTrigger extends MatFloatingTrigger {
@@ -17,7 +17,7 @@ export class MatTooltipTrigger extends MatFloatingTrigger {
         '--mat-floating-container-backdrop-color': 'transparent',
         ...options.cssVariables,
       },
-      floatingOptions: createMatTooltipOptions(options),
+      computePositionConfig: createMatTooltipOptions(options),
     });
   }
 }
@@ -29,7 +29,7 @@ export interface ICreateMatTooltipOptions extends ICreateMatFloatingOptions {
 
 export function createMatTooltipOptions(
   options?: ICreateMatTooltipOptions,
-): IMatFloatingOptions {
+): IMatFloatingComputePositionConfig {
   return createMatFloatingOptions({
     placement: 'bottom',
     defaultPlacements: ['bottom', 'top', 'right', 'left'],

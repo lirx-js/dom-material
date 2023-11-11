@@ -118,6 +118,8 @@ export const MatSnackbarComponent = new Component<HTMLElement, IMatSnackbarCompo
   },
 });
 
+export type IMatSnackbarVirtualComponent = typeof MatSnackbarComponent;
+
 /** CONSTANTS **/
 
 export const MAT_SNACKBAR_COMPONENT_DEFAULT_HORIZONTAL_POSITION: IMatSnackbarComponentHorizontalPosition = 'right';

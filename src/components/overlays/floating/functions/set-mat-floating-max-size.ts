@@ -1,9 +1,9 @@
 import { floorByDPR } from '../../../../functions/round-by-dpr';
 
 export interface ISetMatFloatingMaxSizeOptions {
-  element: HTMLElement;
-  maxWidth: number;
-  maxHeight: number;
+  readonly element: HTMLElement;
+  readonly maxWidth: number;
+  readonly maxHeight: number;
 }
 
 export function setMatFloatingMaxSize(

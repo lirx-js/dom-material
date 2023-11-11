@@ -8,7 +8,7 @@ import {
 import { querySelectorOrThrow } from '@lirx/dom';
 
 export interface IGetMatDialogAnimationTransitionOptions {
-  element: HTMLElement;
+  readonly element: HTMLElement;
 }
 
 export function getMatDialogAnimationTransition(

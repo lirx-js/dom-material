@@ -1,0 +1,30 @@
+@use '../../../../../styles/mat-global.functions' as mat-global-functions;
+
+
+@mixin create-mat-stroked-button(
+  $color,
+  $color-raw,
+) {
+  --mat-button-border-width: 1px;
+  --mat-button-padding-y: 7px;
+  --mat-icon-button-padding: 5px;
+
+  --mat-button-color: #{$color};
+  --mat-button-background-color: transparent;
+  --mat-button-border-color: rgb(0 0 0 / 0.12);
+
+  --mat-button-color--hover: #{$color};
+  --mat-button-background-color--hover: #{mat-global-functions.change-color-opacity($color-raw, 0.15)};
+  --mat-button-border-color--hover: rgb(0 0 0 / 0.12);
+
+  --mat-button-color--focused: #{$color};
+  --mat-button-background-color--focused: #{mat-global-functions.change-color-opacity($color-raw, 0.20)};
+  --mat-button-border-color--focused: rgb(0 0 0 / 0.12);
+
+  --mat-button-color--disabled: #{mat-global-functions.change-color-opacity($color-raw, 0.26)};
+  --mat-button-background-color--disabled: transparent;
+  --mat-button-border-color--disabled: rgb(0 0 0 / 0.12);
+
+  --mat-ripple-color: #{mat-global-functions.change-color-opacity($color-raw, 0.15)};
+}
+

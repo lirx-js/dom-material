@@ -28,7 +28,7 @@ import {
 import { createFloatingElementObservable, IFloatingElementPosition } from '../functions/create-floating-element-observable';
 import { IUnsubscribe } from '@lirx/unsubscribe';
 import { IMatFloatingReference } from './types/mat-floating-reference.type';
-import { IMatFloatingOptions } from './types/options/mat-floating-options.type';
+import { IMatFloatingComputePositionConfig } from './types/options/mat-floating-compute-position-config.type';
 import { IMatFloatingCloseType } from './types/mat-floating-close-type.type';
 import { setMatFloatingPosition } from '../functions/set-mat-floating-position';
 import { ElementReferenceModifier } from '../../../../modifiers/node-reference.modifier';
@@ -37,7 +37,7 @@ import {
   matOverlayInput,
   getMatOverlayInput,
 } from '../../shared/instance/for-component/mat-overlay-input/mat-overlay-input';
-import { IVirtualComponentMatOverlayInput } from '../../shared/instance/for-component/types/virtual-component-mat-overlay.type';
+import { MatOverlay } from '../../shared/instance/mat-overlay.class';
 
 // @ts-ignore
 import html from './mat-floating.component.html?raw';
@@ -50,7 +50,7 @@ import style from './mat-floating.component.scss?inline';
 
 export interface IMatFloatingComponentData extends IHavingMatOverlayInput<HTMLElement, IMatFloatingComponentData> {
   readonly reference: Input<IMatFloatingReference>;
-  readonly options: Input<IMatFloatingOptions | undefined>;
+  readonly computePositionConfig: Input<IMatFloatingComputePositionConfig | undefined>;
   readonly close: Output<IMatFloatingCloseType>;
 }
 
@@ -58,8 +58,7 @@ interface ITemplateData {
   readonly $onMatFloatingContainerClose: IObserver<IMatFloatingContainerComponentCloseType>;
   readonly $matFloatingContentElement: IObserver<HTMLElement>;
   readonly matOverlayReady$: IObservable<boolean>;
-  readonly getMatOverlay: () => IVirtualComponentMatOverlayInput<HTMLElement, IMatFloatingComponentData>;
-  // readonly matOverlay$: IObservable<IVirtualComponentMatOverlayInput<HTMLElement, IMatFloatingComponentData>>;
+  readonly getMatOverlay: () => MatOverlay<IMatFloatingVirtualComponentNode>;
 }
 
 export type IMatFloatingVirtualComponentNode = VirtualComponentNode<HTMLElement, IMatFloatingComponentData>;
@@ -81,14 +80,14 @@ export const MatFloatingComponent = new Component<HTMLElement, IMatFloatingCompo
     return {
       ...matOverlayInput(),
       reference: input<IMatFloatingReference>(),
-      options: input<IMatFloatingOptions | undefined>(void 0),
+      computePositionConfig: input<IMatFloatingComputePositionConfig | undefined>(void 0),
       close: output<IMatFloatingCloseType>(),
     };
   },
   templateData: (node: IMatFloatingVirtualComponentNode): ITemplateData => {
     // INPUTS
     const reference$ = node.input$('reference');
-    const options$ = node.input$('options');
+    const computePositionConfig$ = node.input$('computePositionConfig');
     const matOverlay$ = getMatOverlayInput(node).subscribe;
 
     // OUTPUTS
@@ -105,9 +104,9 @@ export const MatFloatingComponent = new Component<HTMLElement, IMatFloatingCompo
     } = createUnicastReplayLastSource<HTMLElement>();
 
     const position$ = switchMap$$(
-      debounceMicrotask$$(combineLatestSpread(reference$, matFloatingContentElement$, options$)),
-      ([reference, matFloatingContentElement, options]): IObservable<IFloatingElementPosition> => {
-        return createFloatingElementObservable(reference, matFloatingContentElement, options);
+      debounceMicrotask$$(combineLatestSpread(reference$, matFloatingContentElement$, computePositionConfig$)),
+      ([reference, matFloatingContentElement, computePositionConfig]): IObservable<IFloatingElementPosition> => {
+        return createFloatingElementObservable(reference, matFloatingContentElement, computePositionConfig);
       },
     );
 
@@ -126,7 +125,7 @@ export const MatFloatingComponent = new Component<HTMLElement, IMatFloatingCompo
 
     const matOverlayReady$ = take$$(map$$(matOverlay$, () => true), 1);
 
-    const getMatOverlay = (): IVirtualComponentMatOverlayInput<HTMLElement, IMatFloatingComponentData> => {
+    const getMatOverlay = (): MatOverlay<IMatFloatingVirtualComponentNode> => {
       return getMatOverlayInput(node).value;
     };
 
@@ -139,3 +138,4 @@ export const MatFloatingComponent = new Component<HTMLElement, IMatFloatingCompo
   },
 });
 
+export type IMatFloatingComponent = typeof MatFloatingComponent;
