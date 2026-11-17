@@ -1,0 +1,19 @@
+<div class="preview">
+  <rx-inject-slot name="*"></rx-inject-slot>
+</div>
+
+<button
+  class="show-code-button"
+  (click)="($.$toggleShowCode)"
+>
+  <rx-if condition="$.showCode">
+    <rx-if-true>hide code</rx-if-true>
+    <rx-if-false>display code</rx-if-false>
+  </rx-if>
+</button>
+<div
+  class="code"
+  *if="$.showCode"
+>
+  {{ $.code$ }}
+</div>

@@ -1,0 +1,41 @@
+:host {
+  display: block;
+  background-color: #fff;
+  border: 1px solid #c2c2c2;
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+
+  & > .preview,
+  & > .code {
+    padding: 12px;
+  }
+
+  & > .preview {
+    padding-top: 22px + 12px;
+  }
+
+  & > .show-code-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 22px;
+    background-color: #e5e5e5;
+    border: 1px solid #c2c2c2;
+    border-top: 0;
+    border-right: 0;
+    border-radius: 0 0 0 4px;
+    cursor: pointer;
+  }
+
+  & > .code {
+    background: #2c2c2c;
+    color: #fff;
+  }
+}
+
+:host(:not(.app-story-preview--code-visible)) {
+  & > .code {
+    display: none;
+  }
+}

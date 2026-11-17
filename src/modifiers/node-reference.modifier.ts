@@ -1,33 +1,21 @@
 import { IObserver } from '@lirx/core';
-import { createVirtualDOMNodeModifier, VirtualDOMNode, VirtualReactiveElementNode } from '@lirx/dom';
+import {
+  IGenericVirtualReactiveElementNode,
+  VirtualDOMNode,
+  VirtualDOMNodeModifier,
+  VirtualReactiveElementNodeModifier,
+} from '@lirx/dom';
 
-export function nodeReferenceModifierFunction(
-  node: VirtualDOMNode,
-  $destination: IObserver<VirtualDOMNode>,
-): VirtualDOMNode {
-  $destination(node);
-  return node;
-}
+export const NodeReferenceModifier = new VirtualDOMNodeModifier(
+  'ref',
+  (node: VirtualDOMNode, $destination: IObserver<VirtualDOMNode>): void => {
+    $destination(node);
+  },
+);
 
-
-export const NodeReferenceModifier = createVirtualDOMNodeModifier('ref', nodeReferenceModifierFunction);
-
-
-/*--------*/
-
-export function elementReferenceModifierFunction<GElementNode extends Element>(
-  node: VirtualDOMNode,
-  $destination: IObserver<GElementNode>,
-): VirtualDOMNode {
-  if (node instanceof VirtualReactiveElementNode) {
+export const ElementReferenceModifier = new VirtualReactiveElementNodeModifier(
+  'refe',
+  (node: IGenericVirtualReactiveElementNode, $destination: IObserver<Element>): void => {
     $destination(node.elementNode);
-    return node;
-  } else {
-    throw new Error(`Not a VirtualReactiveElementNode`);
-  }
-}
-
-
-export const ElementReferenceModifier = createVirtualDOMNodeModifier<IObserver<Element>, VirtualDOMNode>('refe', elementReferenceModifierFunction);
-
-
+  },
+);

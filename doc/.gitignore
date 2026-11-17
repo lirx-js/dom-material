@@ -1,0 +1,50 @@
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+node_modules/
+dist/
+
+# Users Environment Variables
+.lock-wscript
+.tsdrc
+.typingsrc
+
+#IDE configuration files
+.idea
+.vscode
+*.iml
+
+*.private.*
+
+# OS X trash files
+.DS_Store
+
+#eclipse ide
+.project
+.settings
+.classpath
+/node/
+/target/
+
+.npmrc
+.cache/
+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Swap the comments on the following lines if you wish to use zero-installs
+# In that case, don't forget to run `yarn config set enableGlobalCache false`!
+# Documentation here: https://yarnpkg.com/features/zero-installs
+
+#!.yarn/cache
+.pnp.*

@@ -1,24 +1,26 @@
 import { IObserver } from '@lirx/core';
-import { createVirtualReactiveElementNodeModifier, VirtualDOMNode } from '@lirx/dom';
-import { MatMenuTrigger, IMatMenuTriggerOptions } from './mat-menu-trigger.class';
 import {
-  createMatFloatingTriggerModifierFunction,
-  ICreateMatFloatingTriggerFactoryOptions,
-  IMatMatFloatingTriggerBaseOptions,
+  IMatFloatingTriggerBaseOptions,
+  IMatFloatingTriggerFactoryOptions,
+  MatFloatingTriggerModifier,
 } from '../../floating/mat-floating-trigger/create-mat-floating-trigger-modifier-function';
+import { IMatMenuTriggerOptions, MatMenuTrigger } from './mat-menu-trigger.class';
 
-export interface IMatMenuTriggerModifierOptions extends Omit<IMatMenuTriggerOptions, 'reference'>, IMatMatFloatingTriggerBaseOptions<MatMenuTrigger> {
-  matMenuTrigger?: IObserver<MatMenuTrigger>;
+export interface IMatMenuTriggerModifierOptions
+  extends Omit<IMatMenuTriggerOptions, 'reference'>,
+    IMatFloatingTriggerBaseOptions<MatMenuTrigger> {
+  readonly matMenuTrigger?: IObserver<MatMenuTrigger>;
 }
 
-export const matMenuTriggerModifierFunction = createMatFloatingTriggerModifierFunction<MatMenuTrigger, IMatMenuTriggerModifierOptions>(
+export const MatMenuTriggerModifier = new MatFloatingTriggerModifier<
+  MatMenuTrigger,
+  IMatMenuTriggerModifierOptions
+>(
   'mat-menu-trigger',
-  (
-    {
-      matMenuTrigger: $matMenuTrigger,
-      ...options
-    }: ICreateMatFloatingTriggerFactoryOptions<IMatMenuTriggerModifierOptions>,
-  ): MatMenuTrigger => {
+  ({
+    matMenuTrigger: $matMenuTrigger,
+    ...options
+  }: IMatFloatingTriggerFactoryOptions<IMatMenuTriggerModifierOptions>): MatMenuTrigger => {
     const matMenuTrigger = new MatMenuTrigger(options);
 
     matMenuTrigger.openOnClick();
@@ -26,7 +28,3 @@ export const matMenuTriggerModifierFunction = createMatFloatingTriggerModifierFu
     return matMenuTrigger;
   },
 );
-
-export const MatMenuTriggerModifier = createVirtualReactiveElementNodeModifier<IMatMenuTriggerModifierOptions, VirtualDOMNode>('mat-menu-trigger', matMenuTriggerModifierFunction);
-
-

@@ -1,33 +1,26 @@
-import { IObservableLike } from '@lirx/core';
 import {
   compileStyleAsComponentStyle,
-  createVirtualReactiveElementNodeModifier,
+  IComponentStyle,
   IGenericVirtualReactiveElementNode,
-  VirtualDOMNode,
+  VirtualReactiveElementNodeModifier,
 } from '@lirx/dom';
+
+import { MatButtonModifier } from '../../../../../buttons/mat-button/mat-button.modifier';
 
 // @ts-ignore
 import style from './mat-menu-item.component.scss?inline';
-import { matButtonModifierFunction } from '../../../../../buttons/mat-button/mat-button.modifier';
 
-const componentStyle = compileStyleAsComponentStyle(style);
+const componentStyle: IComponentStyle = compileStyleAsComponentStyle(style);
 
-export interface IMatMenuItemOptions {
-}
+export const MatMenuItemModifier = new VirtualReactiveElementNodeModifier(
+  'mat-menu-item',
+  (node: IGenericVirtualReactiveElementNode): IGenericVirtualReactiveElementNode => {
+    node = MatButtonModifier.apply(node);
 
-export function matMenuItemModifierFunction(
-  node: IGenericVirtualReactiveElementNode,
-  options?: IObservableLike<IMatMenuItemOptions>,
-): VirtualDOMNode {
-  matButtonModifierFunction(node);
+    node.setClass('mat-menu-item', true);
 
-  node.setClass('mat-menu-item', true);
+    componentStyle(node);
 
-  componentStyle(node);
-
-  return node;
-}
-
-export const MatMenuItemModifier = createVirtualReactiveElementNodeModifier<IMatMenuItemOptions | undefined, VirtualDOMNode>('mat-menu-item', matMenuItemModifierFunction);
-
-
+    return node;
+  },
+);

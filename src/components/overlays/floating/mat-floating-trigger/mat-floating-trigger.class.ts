@@ -1,25 +1,33 @@
-import { IGenericVirtualReactiveElementNode, IVirtualComponentNodeSlotTemplate, IStylePropertiesMapAsRecord } from '@lirx/dom';
-import { IMatFloatingVirtualComponentNode } from '../mat-floating/mat-floating.component';
 import {
   IMulticastReplayLastSource,
   IObservable,
+  UNABLE_TO_READ_OBSERVABLE,
   createMulticastReplayLastSource,
+  distinct$$,
+  isMouseOverElementObservable,
+  readObservableValue,
   single,
   switchMap$$,
-  readObservableValue,
-  UNABLE_TO_READ_OBSERVABLE,
-  isMouseOverElementObservable, timeout, distinct$$,
+  timeout,
 } from '@lirx/core';
-import { MatFloating } from '../mat-floating/factory/mat-floating.class';
-import { IMatFloatingComputePositionConfig } from '../mat-floating/types/options/mat-floating-compute-position-config.type';
+import {
+  IGenericVirtualReactiveElementNode,
+  IStylePropertiesMapAsRecord,
+  IVirtualComponentNodeSlotTemplate,
+} from '@lirx/dom';
 import { IUnsubscribe } from '@lirx/unsubscribe';
-import { createMatFloatingReferenceFromVirtualElementNode } from '../functions/create-mat-floating-reference-from-virtual-element.node';
 import { MatOverlay } from '../../shared/instance/mat-overlay.class';
 import { IMatOverlayState } from '../../shared/instance/types/mat-overlay-state.type';
+import { createMatFloatingReferenceFromVirtualElementNode } from '../functions/create-mat-floating-reference-from-virtual-element.node';
+import { MatFloating } from '../mat-floating/factory/mat-floating.class';
+import { IMatFloatingVirtualComponentNode } from '../mat-floating/mat-floating.component';
+import { IMatFloatingComputePositionConfig } from '../mat-floating/types/options/mat-floating-compute-position-config.type';
 
 /** TYPES **/
 
-export type IMatFloatingTriggerTemplate = IVirtualComponentNodeSlotTemplate<{ overlay: MatOverlay<IMatFloatingVirtualComponentNode>; }>;
+export type IMatFloatingTriggerTemplate = IVirtualComponentNodeSlotTemplate<{
+  overlay: MatOverlay<IMatFloatingVirtualComponentNode>;
+}>;
 
 export interface IMatFloatingTriggerOptions {
   readonly reference: IGenericVirtualReactiveElementNode;
@@ -48,22 +56,22 @@ export class MatFloatingTrigger {
   #stopOpenOnClick: IUnsubscribe | undefined;
   #stopOpenOnMouseOver: IUnsubscribe | undefined;
 
-  constructor(
-    {
-      reference,
-      content,
-      computePositionConfig,
-      cssVariables,
-    }: IMatFloatingTriggerOptions,
-  ) {
+  constructor({
+    reference,
+    content,
+    computePositionConfig,
+    cssVariables,
+  }: IMatFloatingTriggerOptions) {
     this.#reference = reference;
     this.#content = content;
     this.#computePositionConfig = computePositionConfig;
     this.#cssVariables = cssVariables;
 
     this.#overlay = void 0;
-    this.#$state$ = createMulticastReplayLastSource<IObservable<IMatOverlayState>>(single<IMatOverlayState>('closed'));
-    this.#state$ = switchMap$$(this.#$state$.subscribe, _ => _);
+    this.#$state$ = createMulticastReplayLastSource<IObservable<IMatOverlayState>>(
+      single<IMatOverlayState>('closed'),
+    );
+    this.#state$ = switchMap$$(this.#$state$.subscribe, (_) => _);
 
     this.#stopOpenOnClick = void 0;
     this.#stopOpenOnMouseOver = void 0;
@@ -96,29 +104,27 @@ export class MatFloatingTrigger {
     }
   }
 
-  openOnMouseOver(
-    {
-      displayDelay = 0,
-      hideDelay = 0,
-    }: IMatFloatingTriggerOpenOnMouseOverOptions = {},
-  ): void {
+  openOnMouseOver({
+    displayDelay = 0,
+    hideDelay = 0,
+  }: IMatFloatingTriggerOpenOnMouseOverOptions = {}): void {
     if (this.#stopOpenOnMouseOver === void 0) {
       const mouseOver$ = distinct$$(
-        switchMap$$(isMouseOverElementObservable(this.#reference.elementNode), (mouseOver: boolean): IObservable<boolean> => {
-          return timeout(
-            mouseOver
-              ? displayDelay
-              : hideDelay,
-            () => mouseOver,
-          );
-        }),
+        switchMap$$(
+          isMouseOverElementObservable(this.#reference.elementNode),
+          (mouseOver: boolean): IObservable<boolean> => {
+            return timeout(mouseOver ? displayDelay : hideDelay, () => mouseOver);
+          },
+        ),
       );
 
       this.#stopOpenOnMouseOver = this.#reference.onConnected((): IUnsubscribe => {
         return mouseOver$((mouseOver: boolean): void => {
           if (mouseOver) {
             const overlay = this.open();
-            overlay.node.elementNode.querySelector<HTMLElement>('mat-floating-container')!.style.setProperty('pointer-events', 'none');
+            overlay.node.elementNode
+              .querySelector<HTMLElement>('mat-floating-container')!
+              .style.setProperty('pointer-events', 'none');
           } else {
             this.close();
           }
@@ -140,9 +146,7 @@ export class MatFloatingTrigger {
         reference: createMatFloatingReferenceFromVirtualElementNode(this.#reference),
         computePositionConfig: this.#computePositionConfig,
         cssVariables: this.#cssVariables,
-        slots: new Map([
-          ['*', this.#content],
-        ]),
+        slots: new Map([['*', this.#content]]),
       });
 
       this.#$state$.emit(instance.state$);
@@ -164,4 +168,3 @@ export class MatFloatingTrigger {
     }
   }
 }
-

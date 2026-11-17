@@ -1,24 +1,28 @@
-import { fromResizeObserver, map$$, shareRL$$ } from '@lirx/core';
-import { createVirtualReactiveElementNodeModifier, VirtualDOMNode, IGenericVirtualReactiveElementNode } from '@lirx/dom';
+import { fromResizeObserver, IObservable, map$$, shareRL$$ } from '@lirx/core';
+import { IGenericVirtualReactiveElementNode, VirtualReactiveElementNodeModifier } from '@lirx/dom';
 
-export function cssVarsSizeModifierFunction(
-  node: IGenericVirtualReactiveElementNode,
-): VirtualDOMNode {
-  const resizeObserver$ = shareRL$$(fromResizeObserver(node.elementNode));
+export const CssVarsSizeModifier = new VirtualReactiveElementNodeModifier(
+  'css-vars-size',
+  (node: IGenericVirtualReactiveElementNode): void => {
+    const resizeObserver$: IObservable<ResizeObserverEntry> = shareRL$$(
+      fromResizeObserver(node.elementNode),
+    );
 
-  const width$ = map$$(resizeObserver$, (entry: ResizeObserverEntry): string => {
-    return `${entry.contentRect.width}px`;
-  });
+    const width$: IObservable<string> = map$$(
+      resizeObserver$,
+      (entry: ResizeObserverEntry): string => {
+        return `${entry.contentRect.width}px`;
+      },
+    );
 
-  const height$ = map$$(resizeObserver$, (entry: ResizeObserverEntry): string => {
-    return `${entry.contentRect.height}px`;
-  });
+    const height$: IObservable<string> = map$$(
+      resizeObserver$,
+      (entry: ResizeObserverEntry): string => {
+        return `${entry.contentRect.height}px`;
+      },
+    );
 
-  node.setReactiveStyleProperty('--mat-element-width-px', width$);
-  node.setReactiveStyleProperty('--mat-element-height-px', height$);
-
-  return node;
-}
-
-export const CssVarsSizeModifier = createVirtualReactiveElementNodeModifier<void, VirtualDOMNode>('css-vars-size', cssVarsSizeModifierFunction);
-
+    node.setReactiveStyleProperty('--mat-element-width-px', width$);
+    node.setReactiveStyleProperty('--mat-element-height-px', height$);
+  },
+);

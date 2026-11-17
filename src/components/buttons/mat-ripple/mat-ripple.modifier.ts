@@ -1,84 +1,99 @@
-import { conditional$$, fromEventTarget, IObservableLike, map$$, IObservable, unknownToObservableAny } from '@lirx/core';
+import {
+  conditional$$,
+  fromEventTarget,
+  IObservable,
+  IObservableLike,
+  map$$,
+  unknownToObservableAny,
+} from '@lirx/core';
 import {
   compileStyleAsComponentStyle,
-  createVirtualReactiveElementNodeModifier,
   getElementCSSVariableValueOrDefault,
+  IComponentStyle,
   IGenericVirtualReactiveElementNode,
   IStyleProperty,
-  VirtualDOMNode,
   VirtualReactiveElementNode,
+  VirtualReactiveElementNodeModifier,
 } from '@lirx/dom';
 import { createRippleFromElementAndPointerEvent } from './functions/create-ripple-from-element-and-pointer-event';
 
 // @ts-ignore
 import style from './mat-ripple.component.scss?inline';
 
-const componentStyle = compileStyleAsComponentStyle(style);
+const componentStyle: IComponentStyle = compileStyleAsComponentStyle(style);
 
 export interface IMatRippleOptions {
-  enabled?: boolean;
+  readonly enabled?: boolean;
 }
 
-export function matRippleModifierFunction(
-  node: IGenericVirtualReactiveElementNode,
-  options?: IObservableLike<IMatRippleOptions>,
-): VirtualDOMNode {
-  const options$ = unknownToObservableAny(options) as IObservable<IMatRippleOptions | undefined>;
+export const MatRippleModifier = new VirtualReactiveElementNodeModifier(
+  'mat-ripple',
+  (
+    node: IGenericVirtualReactiveElementNode,
+    options?: IObservableLike<IMatRippleOptions> | undefined | void,
+  ): IGenericVirtualReactiveElementNode => {
+    const options$ = unknownToObservableAny(options) as IObservable<IMatRippleOptions | undefined>;
 
-  const element: HTMLElement = node.elementNode as HTMLElement;
+    const element: HTMLElement = node.elementNode as HTMLElement;
 
-  node.setClass('mat-ripple', true);
+    node.setClass('mat-ripple', true);
 
-  componentStyle(node);
+    componentStyle(node);
 
-  const ripplesContainer = VirtualReactiveElementNode.createHTML<HTMLSpanElement>('span');
-  ripplesContainer.setAttribute('class', 'mat-ripples-container');
-  const ripplesContainerElement: HTMLElement = ripplesContainer.elementNode;
+    const ripplesContainer = VirtualReactiveElementNode.createHTML<HTMLSpanElement>('span');
+    ripplesContainer.setAttribute('class', 'mat-ripples-container');
+    const ripplesContainerElement: HTMLElement = ripplesContainer.elementNode;
 
-  let computedStylePosition!: IStyleProperty;
-  let stylePosition!: IStyleProperty;
+    let computedStylePosition!: IStyleProperty;
+    let stylePosition!: IStyleProperty;
 
-  const onPointerDown = (event: PointerEvent): void => {
-    const isDisabled: boolean = ((element as any).disabled ?? false)
-      || element.hasAttribute('disabled')
-      || element.classList.contains('mat--disabled')
-    ;
+    const onPointerDown = (event: PointerEvent): void => {
+      const isDisabled: boolean =
+        ((element as any).disabled ?? false) ||
+        element.hasAttribute('disabled') ||
+        element.classList.contains('mat--disabled');
+      if (event.button === 0 && !isDisabled) {
+        ripplesContainer.attach(node);
 
-    if ((event.button === 0) && !isDisabled) {
-      ripplesContainer.attach(node);
+        if (ripplesContainerElement.childElementCount === 0) {
+          computedStylePosition = node.getStyleProperty('position', { computed: true });
 
-      if (ripplesContainerElement.childElementCount === 0) {
-        computedStylePosition = node.getStyleProperty('position', { computed: true });
-
-        if (computedStylePosition.value === 'static') {
-          stylePosition = node.getStyleProperty('position');
-          node.setStyleProperty('position', 'relative');
+          if (computedStylePosition.value === 'static') {
+            stylePosition = node.getStyleProperty('position');
+            node.setStyleProperty('position', 'relative');
+          }
         }
-      }
 
-      const color: string = getElementCSSVariableValueOrDefault(element, '--mat-ripple-color', 'rgb(0 0 0 / 0.1)');
-      const openDuration: number = Number(getElementCSSVariableValueOrDefault(element, '--mat-ripple-open-duration', '200'));
-      const closeDuration: number = Number(getElementCSSVariableValueOrDefault(element, '--mat-ripple-close-duration', '200'));
+        const color: string = getElementCSSVariableValueOrDefault(
+          element,
+          '--mat-ripple-color',
+          'rgb(0 0 0 / 0.1)',
+        );
+        const openDuration: number = Number(
+          getElementCSSVariableValueOrDefault(element, '--mat-ripple-open-duration', '200'),
+        );
+        const closeDuration: number = Number(
+          getElementCSSVariableValueOrDefault(element, '--mat-ripple-close-duration', '200'),
+        );
 
-      const {
-        element: rippleElement,
-        open,
-        close,
-      } = createRippleFromElementAndPointerEvent({
-        element,
-        event,
-        color,
-        openDuration,
-        closeDuration,
-      });
+        const {
+          element: rippleElement,
+          open,
+          close,
+        } = createRippleFromElementAndPointerEvent({
+          element,
+          event,
+          color,
+          openDuration,
+          closeDuration,
+        });
 
-      ripplesContainerElement.appendChild(rippleElement);
+        ripplesContainerElement.appendChild(rippleElement);
 
-      const unsubscribePointerUp = pointerUp$(() => {
-        unsubscribePointerUp();
-        openPromise.then(() => {
-          return close()
-            .then(() => {
+        const unsubscribePointerUp = pointerUp$(() => {
+          unsubscribePointerUp();
+          openPromise.then(() => {
+            return close().then(() => {
               rippleElement.remove();
 
               if (ripplesContainerElement.childElementCount === 0) {
@@ -89,29 +104,26 @@ export function matRippleModifierFunction(
                 }
               }
             });
+          });
         });
-      });
 
-      const openPromise = open();
-    }
-  };
+        const openPromise = open();
+      }
+    };
 
-  const enabled$ = map$$(options$, (options: IMatRippleOptions | undefined): boolean => {
-    return options?.enabled ?? true;
-  });
+    const enabled$ = map$$(options$, (options: IMatRippleOptions | undefined): boolean => {
+      return options?.enabled ?? true;
+    });
 
-  const pointerDown$ = conditional$$(
-    fromEventTarget<'pointerdown', PointerEvent>(element, 'pointerdown'),
-    enabled$,
-  );
+    const pointerDown$ = conditional$$(
+      fromEventTarget<'pointerdown', PointerEvent>(element, 'pointerdown'),
+      enabled$,
+    );
 
-  const pointerUp$ = fromEventTarget(window, 'pointerup');
+    const pointerUp$ = fromEventTarget(window, 'pointerup');
 
-  pointerDown$(onPointerDown);
+    pointerDown$(onPointerDown);
 
-  return node;
-}
-
-export const MatRippleModifier = createVirtualReactiveElementNodeModifier<IMatRippleOptions | undefined, VirtualDOMNode>('mat-ripple', matRippleModifierFunction);
-
-
+    return node;
+  },
+);
